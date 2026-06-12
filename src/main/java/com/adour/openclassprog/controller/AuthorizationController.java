@@ -36,7 +36,7 @@ public class AuthorizationController {
             }
     )
     public ResponseEntity<String> sayHelloWithRoleAdminAndReadAuthority() {
-        return ResponseEntity.ok("Hello, you have access to a protected resource that requires admin role and read authority.");
+        return ResponseEntity.ok("Hello Admin, Welcome back to Open Class Programming.");
     }
 
     @DeleteMapping("/admin/resource")
