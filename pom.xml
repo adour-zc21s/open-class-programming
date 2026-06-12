@@ -68,11 +68,8 @@
 			<artifactId>spring-boot-starter-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- =============================================================== -->
-		<!-- external library dependencies -->
-		<!-- =============================================================== -->
-
-		<!-- ===== jjwt ===== -->
+		<!-- ***** external library dependencies ***** -->
+		<!-- ***** jjwt ***** -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
@@ -88,7 +85,13 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 		</dependency>
-
+		<!--- ***** START package model mapper ***** -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<!--- ***** END package model mapper ***** -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
