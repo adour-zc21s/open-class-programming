@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "crms")
+@Table(name = "crm")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Crm {
@@ -32,4 +32,11 @@ public class Crm {
     private String type_kendaraan;
     @Column
     private String address;
+    @Column
+    private String email;
+    @Column
+    private String reg_number;
+    @Column
+    private String vin;
+
 }

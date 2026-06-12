@@ -30,8 +30,8 @@ import org.springframework.context.annotation.Configuration;
                         name = "adour-zc21s",
                         email = "wahid.asimetris@gmail.com"
                 ),
-                title = "Spring Security 6+ APP",
-                description = "Spring Boot 4+ Spring Security 6+",
+                title = "Spring Security 7+ APP",
+                description = "Spring Boot 4+ Spring Security 7+",
                 version = "0.0.1-SNAPSHOT"
         ),
         servers = {

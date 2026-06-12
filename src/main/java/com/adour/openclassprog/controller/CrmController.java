@@ -1,10 +1,13 @@
 package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.dto.CrmDTO;
+import com.adour.openclassprog.payload.res.WebResponse;
 import com.adour.openclassprog.service.CrmService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.NoSuchElementException;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/crm/v1")
+@PreAuthorize("hasAnyRole('ADMIN','USER')")
+@Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
 public class CrmController {
     private CrmService crmService;
     // http://localhost8081/api/crm/v1
@@ -50,6 +55,7 @@ public class CrmController {
         }
     }
     @GetMapping
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<List<CrmDTO>> cariSemua(){
         try {
             // Cari ke data ke db
@@ -60,12 +66,15 @@ public class CrmController {
             throw new NoSuchElementException("Getting all is failed");
         }
     }
-    public ResponseEntity<Void> hapusCrm(@PathVariable("id") Integer id) {
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('DELETE_PRIVILEGE') and hasRole('ADMIN')")
+    public ResponseEntity<WebResponse<String>> hapusCrm(@PathVariable("id") Integer id) {
         try {
             crmService.hapusCrmById(id);
-            return ResponseEntity.noContent().build();
+            WebResponse<String> response = new WebResponse<>("data berhasil di hapus", null);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            throw new NoSuchElementException(("Deleting is failed"));
+            throw new NoSuchElementException("Deleting is failed");
         }
     }
 }

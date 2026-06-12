@@ -1,5 +1,6 @@
 package com.adour.openclassprog.dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CrmDTO {
     private Integer id;
+    private String title;
     private String name;
+    private String hp;
     private String type_kendaraan;
+    private String address;
+    private String email;
+    private String reg_number;
+    private String vin;
 }
