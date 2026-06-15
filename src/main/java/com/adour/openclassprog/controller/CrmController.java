@@ -36,7 +36,8 @@ public class CrmController {
             throw new NoSuchElementException("Creation failed");
         }
     }
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<CrmDTO> rubahCrm(@PathVariable("id") Integer id, @RequestBody CrmDTO crmDTO){
         try {
             CrmDTO crmDTO1 = crmService.updateCrm(id, crmDTO);

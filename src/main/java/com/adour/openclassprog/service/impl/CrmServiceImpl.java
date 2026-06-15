@@ -55,14 +55,10 @@ public class CrmServiceImpl implements CrmService {
     public CrmDTO updateCrm(Integer id, CrmDTO updateCrmDto) {
         Crm existingCrm = crmRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("ID not found"));
-        existingCrm.setName(updateCrmDto.getName());
-        existingCrm.setReg_number(updateCrmDto.getReg_number());
-        existingCrm.setHp(updateCrmDto.getHp());
-        existingCrm.setVin(updateCrmDto.getVin());
-        existingCrm.setType_kendaraan(updateCrmDto.getType_kendaraan());
-        existingCrm.setAddress(updateCrmDto.getAddress());
-        Crm updateCrm = crmRepository.save(existingCrm);
-        return modelMapper.map(updateCrm,CrmDTO.class);
+        // Maps updateCrmDto properties directly onto the existing entity, ignoring nulls
+        modelMapper.map(updateCrmDto, existingCrm);
+        Crm updatedCrm = crmRepository.save(existingCrm);
+        return modelMapper.map(updatedCrm, CrmDTO.class);
     }
 
     @Override
