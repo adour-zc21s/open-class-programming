@@ -1,6 +1,7 @@
 package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.dto.CrmDTO;
+import com.adour.openclassprog.model.Crm;
 import com.adour.openclassprog.payload.res.WebResponse;
 import com.adour.openclassprog.service.CrmService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,9 +29,9 @@ public class CrmController {
     private CrmService crmService;
     // http://localhost8081/api/crm/v1
     @PostMapping
-    public ResponseEntity<CrmDTO> tambahCrm(@RequestBody CrmDTO crmDTO){
+    public ResponseEntity<Crm> tambahCrm(@RequestBody Crm crm){
         try {
-            CrmDTO simpanCrm = crmService.createCrm(crmDTO);
+            Crm simpanCrm = crmService.createCrm(crm);
             return new ResponseEntity<>(simpanCrm, HttpStatus.CREATED);
         } catch (Exception e) {
             throw new NoSuchElementException("Creation failed");
@@ -38,10 +39,10 @@ public class CrmController {
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
-    public ResponseEntity<CrmDTO> rubahCrm(@PathVariable("id") Integer id, @RequestBody CrmDTO crmDTO){
+    public ResponseEntity<Crm> rubahCrm(@PathVariable Integer id, @RequestBody Crm crm){
         try {
-            CrmDTO crmDTO1 = crmService.updateCrm(id, crmDTO);
-            return ResponseEntity.ok(crmDTO1);
+            Crm rubahCrm = crmService.updateCrm(id, crm);
+            return ResponseEntity.ok(rubahCrm);
         } catch (Exception e) {
             throw new NoSuchElementException("Updating is failed");
         }

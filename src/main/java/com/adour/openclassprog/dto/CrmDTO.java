@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CrmDTO {
     private Integer id;
-    private String title;
     private String name;
     private String hp;
     private String type_kendaraan;

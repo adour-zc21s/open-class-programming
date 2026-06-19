@@ -1,6 +1,7 @@
 package com.adour.openclassprog.service;
 
 import com.adour.openclassprog.dto.CrmDTO;
+import com.adour.openclassprog.model.Crm;
 
 import java.util.List;
 
@@ -11,9 +12,9 @@ import java.util.List;
  * Created 12/06/2026 - 13:12
  */
 public interface CrmService {
-    CrmDTO createCrm(CrmDTO crmDTO);
+    Crm createCrm(Crm crm);
     CrmDTO getCrmById(Integer id);
     List<CrmDTO> cariSemua();
-    CrmDTO updateCrm(Integer id, CrmDTO updateCrmDto);
+    Crm updateCrm(Integer id, Crm updateCrm);
     void hapusCrmById(Integer id);
 }

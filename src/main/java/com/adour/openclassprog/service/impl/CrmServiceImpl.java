@@ -29,11 +29,9 @@ public class CrmServiceImpl implements CrmService {
     @Autowired
     private ModelMapper modelMapper;
     @Override
-    public CrmDTO createCrm(CrmDTO crmDTO) {
-        // Converts a Transfer Object (DTO) into a JPA Entity using ModelMapper
-        Crm crm = modelMapper.map(crmDTO, Crm.class);
+    public Crm createCrm(Crm crm) {
         crm = crmRepository.save(crm);
-        return modelMapper.map(crm, CrmDTO.class);
+        return modelMapper.map(crm, Crm.class);
     }
 
     @Override
@@ -52,13 +50,13 @@ public class CrmServiceImpl implements CrmService {
     }
 
     @Override
-    public CrmDTO updateCrm(Integer id, CrmDTO updateCrmDto) {
+    public Crm updateCrm(Integer id, Crm updateCrm) {
         Crm existingCrm = crmRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("ID not found"));
         // Maps updateCrmDto properties directly onto the existing entity, ignoring nulls
-        modelMapper.map(updateCrmDto, existingCrm);
+        modelMapper.map(updateCrm, existingCrm);
         Crm updatedCrm = crmRepository.save(existingCrm);
-        return modelMapper.map(updatedCrm, CrmDTO.class);
+        return modelMapper.map(updatedCrm, Crm.class);
     }
 
     @Override
