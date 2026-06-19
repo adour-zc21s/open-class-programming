@@ -66,9 +66,9 @@ public class AccController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<AccountDTO> rubahAcc(@PathVariable Long id,
-                                            @RequestBody AccountDTO acc){
+                                            @RequestBody AccountDTO accDTO){
         try {
-            AccountDTO existingAcc = accService.updateAcc(id, acc);
+            AccountDTO existingAcc = accService.updateAcc(id, accDTO);
             return ResponseEntity.ok(existingAcc);
         } catch (Exception e) {
             throw new NoSuchElementException("Updating Account failed");

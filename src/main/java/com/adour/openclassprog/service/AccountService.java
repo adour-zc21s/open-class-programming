@@ -17,6 +17,6 @@ public interface AccountService {
     Account withdraw(Long id, double amount);
     Account getAccById(Long id);
     List<AccountDTO> cariSemua();
-    AccountDTO updateAcc(Long id, AccountDTO updateAcc);
+    AccountDTO updateAcc(Long id, AccountDTO updateAccDTO);
     void hapusAccById(Long id);
 }

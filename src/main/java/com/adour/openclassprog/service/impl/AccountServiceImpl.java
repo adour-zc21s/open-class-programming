@@ -76,11 +76,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDTO updateAcc(Long id, AccountDTO updateAcc) {
+    public AccountDTO updateAcc(Long id, AccountDTO updateAccDTO) {
         Account existingAcc = accRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account ID not found"));
         // Maps updateCrmDto properties directly onto the existing entity, ignoring nulls
-        modelMapper.map(updateAcc, existingAcc);
+        modelMapper.map(updateAccDTO, existingAcc);
         Account updatedAcc1 = accRepository.save(existingAcc);
         return modelMapper.map(updatedAcc1, AccountDTO.class);
     }
