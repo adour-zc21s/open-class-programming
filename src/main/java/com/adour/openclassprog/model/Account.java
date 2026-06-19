@@ -14,29 +14,29 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "crm")
+@Table(name = "ACCOUNTS")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Crm {
+public class Account {
     @Id
     // GenerationType.IDENTITY is autoincrement
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+    @Column
+    private String NIK;
+    @Column
+    private String accountNumber;
     @Column
     private String title;
     @Column
     private String name;
     @Column
+    private double balance;
+    @Column
     private String hp;
-    @Column
-    private String type_kendaraan;
-    @Column
-    private String address;
     @Column
     private String email;
     @Column
-    private String reg_number;
-    @Column
-    private String vin;
+    private String address;
 
 }

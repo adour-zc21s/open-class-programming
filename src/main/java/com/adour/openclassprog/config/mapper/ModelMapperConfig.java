@@ -1,7 +1,7 @@
 package com.adour.openclassprog.config.mapper;
 
-import com.adour.openclassprog.dto.CrmDTO;
-import com.adour.openclassprog.model.Crm;
+import com.adour.openclassprog.dto.AccountDTO;
+import com.adour.openclassprog.model.Account;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -24,8 +24,8 @@ public class ModelMapperConfig {
         // Konverter string menjadi huruf besar.
         Converter<String, String> toUppercase = ctx ->
                 ctx.getSource() != null ? ctx.getSource().toUpperCase() : null;
-        modelMapper.typeMap(CrmDTO.class, Crm.class).addMappings(mapper -> {
-            mapper.using(toUppercase).map(CrmDTO::getName, Crm::setName);
+        modelMapper.typeMap(AccountDTO.class, Account.class).addMappings(mapper -> {
+            mapper.using(toUppercase).map(AccountDTO::getName, Account::setName);
         });
         return modelMapper;
     }

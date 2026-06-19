@@ -1,6 +1,6 @@
 package com.adour.openclassprog.repository;
 
-import com.adour.openclassprog.model.Crm;
+import com.adour.openclassprog.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /*
@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * +62 813 8522 9903
  * Created 12/06/2026 - 13:11
  */
-public interface CrmRepository extends JpaRepository<Crm, Integer> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 }

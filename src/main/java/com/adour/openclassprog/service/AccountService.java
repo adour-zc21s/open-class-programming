@@ -1,0 +1,22 @@
+package com.adour.openclassprog.service;
+
+import com.adour.openclassprog.dto.AccountDTO;
+import com.adour.openclassprog.model.Account;
+
+import java.util.List;
+
+/*
+ * @author {Open Class Programming}
+ * Abdur Rahman Wahid - X-Sari
+ * +62 813 8522 9903
+ * Created 12/06/2026 - 13:12
+ */
+public interface AccountService {
+    Account createAcc(Account acc);
+    Account deposit(Long id, double amount);
+    Account withdraw(Long id, double amount);
+    Account getAccById(Long id);
+    List<AccountDTO> cariSemua();
+    AccountDTO updateAcc(Long id, AccountDTO updateAcc);
+    void hapusAccById(Long id);
+}
