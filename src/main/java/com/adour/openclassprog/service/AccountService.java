@@ -3,6 +3,7 @@ package com.adour.openclassprog.service;
 import com.adour.openclassprog.dto.AccountDTO;
 import com.adour.openclassprog.model.Account;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 
 /*
@@ -13,8 +14,8 @@ import java.util.List;
  */
 public interface AccountService {
     Account createAcc(Account acc);
-    Account deposit(Long id, double amount);
-    Account withdraw(Long id, double amount);
+    Account deposit(Long id, double amount) throws AccountNotFoundException;
+    Account withdraw(Long id, double amount) throws AccountNotFoundException;
     Account getAccById(Long id);
     List<AccountDTO> cariSemua();
     AccountDTO updateAcc(Long id, AccountDTO updateAccDTO);

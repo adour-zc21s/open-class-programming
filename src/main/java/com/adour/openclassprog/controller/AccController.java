@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -24,7 +25,7 @@ import java.util.NoSuchElementException;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/acc/v1")
+@RequestMapping("/api/acc/v1/")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
 public class AccController {
@@ -42,26 +43,24 @@ public class AccController {
     @PutMapping("/{id}/deposit")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<Account> deposit(@PathVariable Long id,
-                                           @RequestBody Map<String, Double> request){
-        try {
-            double amount = request.get("amount");
-            Account deposit = accService.deposit(id, amount);
-            return ResponseEntity.ok(deposit);
-        } catch (Exception e) {
-            throw new NoSuchElementException("Updating Account failed");
-        }
+                                           @RequestBody Map<String, Double> request)
+                                            throws AccountNotFoundException {
+        // Extract amount service
+        double amount = request.get("amount");
+        // Let the service handle it. If it fails, the specific exception bubbles up.
+        Account deposit = accService.deposit(id, amount);
+        return ResponseEntity.ok(deposit);
     }
     @PutMapping("/{id}/withdraw")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<Account> withdraw(@PathVariable Long id,
-                                           @RequestBody Map<String, Double> request){
-        try {
-            double amount = request.get("amount");
-            Account withdraw = accService.withdraw(id, amount);
-            return ResponseEntity.ok(withdraw);
-        } catch (Exception e) {
-            throw new NoSuchElementException("Updating Account failed");
-        }
+                                           @RequestBody Map<String, Double> request)
+                                            throws AccountNotFoundException {
+        // Extract amount service
+        double amount = request.get("amount");
+        // Let the service handle it. If it fails, the specific exception bubbles up.
+        Account withdraw = accService.withdraw(id, amount);
+        return ResponseEntity.ok(withdraw);
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")

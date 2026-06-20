@@ -53,6 +53,7 @@ public class SecurityConfiguration {
                         request
                                 .requestMatchers(
                                         "/api/v1/auth/**",
+                                        "/api/acc/v1",
                                         "/v2/api-docs",
                                         "/v3/api-docs",
                                         "/v3/api-docs/**",

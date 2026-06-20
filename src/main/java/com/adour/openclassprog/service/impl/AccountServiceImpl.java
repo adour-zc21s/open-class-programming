@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -38,26 +39,26 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account deposit(Long id, double amount) {
+    public Account deposit(Long id, double amount) throws AccountNotFoundException {
         Account acc = accRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exist"));
+                .orElseThrow(() -> new AccountNotFoundException("Account does not exist"));
         double total = acc.getBalance() + amount;
         acc.setBalance(total);
         Account simpanAcc = accRepository.save(acc);
-        return modelMapper.map(acc, Account.class);
+        return modelMapper.map(simpanAcc, Account.class);
     }
 
     @Override
-    public Account withdraw(Long id, double amount) {
+    public Account withdraw(Long id, double amount) throws AccountNotFoundException {
         Account acc = accRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exist"));
+                .orElseThrow(() -> new AccountNotFoundException("Account does not exist"));
         if(acc.getBalance() < amount) {
             throw new RuntimeException("Insufficient amount");
         }
         double total = acc.getBalance() - amount;
         acc.setBalance(total);
         Account simpanTransaksi = accRepository.save(acc);
-        return modelMapper.map(acc, Account.class);
+        return modelMapper.map(simpanTransaksi, Account.class);
     }
 
     @Override
