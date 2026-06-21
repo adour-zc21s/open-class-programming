@@ -23,9 +23,10 @@ import java.util.NoSuchElementException;
  * +62 813 8522 9903
  * Created 12/06/2026 - 13:20
  */
+@CrossOrigin("*")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/acc/v1/")
+@RequestMapping("/api/acc/v1")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
 public class AccController {

@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Authentication", description = "The Authentication API. Contains operations like login, logout, refresh-token etc.")
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/auth")
 @SecurityRequirements() /*
 This API won't have any security requirements. Therefore, we need to override the default security requirement configuration
