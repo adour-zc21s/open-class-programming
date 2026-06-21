@@ -17,7 +17,8 @@ import lombok.NoArgsConstructor;
 public class AccountDTO {
     private Long id;
     private String name;
-//    private Double balance;
+    private String nik;
+    private Double balance;
     private String accountNumber;
     private String hp;
     private String address;
