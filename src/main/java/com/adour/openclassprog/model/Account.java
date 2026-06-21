@@ -23,7 +23,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String NIK;
+    private String nik;
     @Column
     private String accountNumber;
     @Column

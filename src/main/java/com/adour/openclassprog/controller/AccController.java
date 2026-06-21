@@ -86,11 +86,9 @@ public class AccController {
     }
     @GetMapping
     @PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('ADMIN')")
-    public ResponseEntity<List<AccountDTO>> cariSemua(){
+    public ResponseEntity<List<AccountDTO>> ambilSemua(){
         try {
-            // Cari ke data ke db
-            List<AccountDTO> crmList = accService.cariSemua();
-            // Response hasil pencarian
+            List<AccountDTO> crmList = accService.ambilSemua();
             return new ResponseEntity<>(crmList, HttpStatus.OK);
         } catch (Exception e) {
             throw new NoSuchElementException("Getting all Account failed");

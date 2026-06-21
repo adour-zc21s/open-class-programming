@@ -69,7 +69,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AccountDTO> cariSemua() {
+    public List<AccountDTO> ambilSemua() {
         List<Account> acc = accRepository.findAll();
         return acc.stream()
                 .map(acc1 -> modelMapper.map(acc1, AccountDTO.class))

@@ -35,7 +35,6 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 1. FIXED: Explicitly tell Spring Security to process CORS configurations first
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 .csrf(AbstractHttpConfigurer::disable)
@@ -66,14 +65,13 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    // 2. FIXED: Standardized to a native Spring CorsConfigurationSource Bean
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3001"); // Matches your specific frontend port
+        config.addAllowedOrigin("http://localhost:3000");
 
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,

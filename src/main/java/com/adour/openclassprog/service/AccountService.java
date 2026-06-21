@@ -17,7 +17,7 @@ public interface AccountService {
     Account deposit(Long id, double amount) throws AccountNotFoundException;
     Account withdraw(Long id, double amount) throws AccountNotFoundException;
     Account getAccById(Long id);
-    List<AccountDTO> cariSemua();
+    List<AccountDTO> ambilSemua();
     AccountDTO updateAcc(Long id, AccountDTO updateAccDTO);
     void hapusAccById(Long id);
 }
