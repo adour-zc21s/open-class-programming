@@ -1,5 +1,6 @@
 package com.adour.openclassprog.model;
 
+import com.adour.openclassprog.enums.DeviceType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,8 +28,9 @@ public class Device {
     // devicename or hostname
     @Column(name = "device_name")
     private String deviceName;
+    @Enumerated(EnumType.STRING)
     @Column(name = "device_type")
-    private String deviceType;
+    private DeviceType deviceType;
     private String manufacture;
     @Column(name = "model_number")
     private String modelNumber;

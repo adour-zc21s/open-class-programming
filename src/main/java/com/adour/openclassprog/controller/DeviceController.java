@@ -1,6 +1,7 @@
 package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.dto.DeviceDTO;
+import com.adour.openclassprog.enums.DeviceType;
 import com.adour.openclassprog.model.Device;
 import com.adour.openclassprog.payload.res.WebResponse;
 import com.adour.openclassprog.service.DeviceService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -69,6 +71,10 @@ public class DeviceController {
         } catch (Exception e) {
             throw new NoSuchElementException("Deleting Device is failed, try again");
         }
+    }
+    @GetMapping("/types")
+    public List<DeviceType> getDeviceTypes() {
+        return Arrays.asList(DeviceType.values());
     }
 
 }

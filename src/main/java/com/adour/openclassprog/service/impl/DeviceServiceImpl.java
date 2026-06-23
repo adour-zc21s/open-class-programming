@@ -1,7 +1,6 @@
 package com.adour.openclassprog.service.impl;
 
 import com.adour.openclassprog.dto.DeviceDTO;
-import com.adour.openclassprog.model.Account;
 import com.adour.openclassprog.model.Device;
 import com.adour.openclassprog.repository.DeviceRepository;
 import com.adour.openclassprog.service.DeviceService;
