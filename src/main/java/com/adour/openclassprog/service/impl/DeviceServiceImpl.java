@@ -1,6 +1,7 @@
 package com.adour.openclassprog.service.impl;
 
 import com.adour.openclassprog.dto.DeviceDTO;
+import com.adour.openclassprog.model.Account;
 import com.adour.openclassprog.model.Device;
 import com.adour.openclassprog.repository.DeviceRepository;
 import com.adour.openclassprog.service.DeviceService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 /*
@@ -41,7 +43,9 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Device getDevById(Long id) {
-        return null;
+        Device dv = deviceRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Account record not found with Account ID: \" + id"));
+        return modelMapper.map(dv, Device.class);
     }
 
     @Override
@@ -54,6 +58,8 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public void deleteDevById(Long id) {
-
+        Device existingDev = deviceRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException(id + "not found"));
+        deviceRepository.delete(existingDev);
     }
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /*
  * @author {Open Class Programming}
  * Abdur Rahman Wahid - X-Sari
@@ -19,5 +21,9 @@ public class DeviceDTO {
     private String deviceName;
     private String deviceType;
     private String manufacture;
+    private String serialNumber;
     private String macAddress;
+    private String user;
+    private Date purchaseDate;
+    private Date warrantyExpired;
 }
