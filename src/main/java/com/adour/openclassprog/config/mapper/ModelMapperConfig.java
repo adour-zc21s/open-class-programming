@@ -42,7 +42,7 @@ public class ModelMapperConfig {
 
     private void configureDeviceMapping(ModelMapper modelMapper, Converter<String, String> toUppercase) {
         modelMapper.typeMap(DeviceDTO.class, Device.class).addMappings(mapper -> {
-            mapper.using(toUppercase).map(DeviceDTO::getDeviceType, Device::setDeviceType);
+            mapper.using(toUppercase).map(DeviceDTO::getUser, Device::setUser);
         });
     }
 }
