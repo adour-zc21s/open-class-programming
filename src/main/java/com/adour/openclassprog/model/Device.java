@@ -14,11 +14,11 @@ import java.util.Date;
  * +62 813 8522 9903
  * Created 23/06/2026 - 8:59
  */
-@Data
 @Entity
 @Table(name = "DEVICES")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

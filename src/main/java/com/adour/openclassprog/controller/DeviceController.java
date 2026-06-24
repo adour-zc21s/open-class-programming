@@ -25,7 +25,7 @@ import java.util.NoSuchElementException;
 @CrossOrigin("*")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/dev/v1")
+@RequestMapping("/api/v1/dev")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
 public class DeviceController {
@@ -58,7 +58,7 @@ public class DeviceController {
             Device dv = deviceService.getDevById(id);
             return new ResponseEntity<>(dv, HttpStatus.OK);
         } catch (Exception adour) {
-            throw new NoSuchElementException("Getting Account is failed");
+            throw new NoSuchElementException("Getting device is failed");
         }
     }
     @DeleteMapping("/{id}")

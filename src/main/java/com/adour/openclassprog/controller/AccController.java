@@ -26,7 +26,7 @@ import java.util.NoSuchElementException;
 @CrossOrigin("*")
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/acc/v1")
+@RequestMapping("/api/v1/acc")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
 public class AccController {
@@ -88,8 +88,8 @@ public class AccController {
     @PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<List<AccountDTO>> ambilSemua(){
         try {
-            List<AccountDTO> crmList = accService.ambilSemua();
-            return new ResponseEntity<>(crmList, HttpStatus.OK);
+            List<AccountDTO> accList = accService.ambilSemua();
+            return new ResponseEntity<>(accList, HttpStatus.OK);
         } catch (Exception e) {
             throw new NoSuchElementException("Getting all Account failed");
         }

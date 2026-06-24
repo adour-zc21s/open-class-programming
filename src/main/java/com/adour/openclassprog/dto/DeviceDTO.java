@@ -15,7 +15,6 @@ import java.util.Date;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class DeviceDTO {
     public Long id;
     private String deviceName;
