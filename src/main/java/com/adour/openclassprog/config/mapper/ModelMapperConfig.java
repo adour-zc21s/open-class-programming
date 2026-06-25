@@ -1,9 +1,7 @@
 package com.adour.openclassprog.config.mapper;
 
 import com.adour.openclassprog.dto.AccountDTO;
-import com.adour.openclassprog.dto.DeviceDTO;
 import com.adour.openclassprog.model.Account;
-import com.adour.openclassprog.model.Device;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +27,7 @@ public class ModelMapperConfig {
 
         // Call separate configuration methods
         configureAccountMapping(modelMapper, toUppercase);
-        configureDeviceMapping(modelMapper, toUppercase);
+//        configureDeviceMapping(modelMapper, toUppercase);
 
         return modelMapper;
     }
@@ -40,9 +38,9 @@ public class ModelMapperConfig {
         });
     }
 
-    private void configureDeviceMapping(ModelMapper modelMapper, Converter<String, String> toUppercase) {
-        modelMapper.typeMap(DeviceDTO.class, Device.class).addMappings(mapper -> {
-            mapper.using(toUppercase).map(DeviceDTO::getUser, Device::setUser);
-        });
-    }
+//    private void configureDeviceMapping(ModelMapper modelMapper, Converter<String, String> toUppercase) {
+//        modelMapper.typeMap(DeviceDTOx.class, Devicex.class).addMappings(mapper -> {
+//            mapper.using(toUppercase).map(DeviceDTOx::getUser, Devicex::setUser);
+//        });
+//    }
 }

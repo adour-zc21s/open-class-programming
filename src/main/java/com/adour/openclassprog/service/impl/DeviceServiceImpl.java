@@ -1,38 +1,55 @@
 package com.adour.openclassprog.service.impl;
 
+import com.adour.openclassprog.config.map.DeviceMap;
 import com.adour.openclassprog.dto.DeviceDTO;
 import com.adour.openclassprog.model.Device;
 import com.adour.openclassprog.repository.DeviceRepository;
 import com.adour.openclassprog.service.DeviceService;
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 /*
  * @author {Open Class Programming}
  * Abdur Rahman Wahid - X-Sari
  * +62 813 8522 9903
- * Created 23/06/2026 - 9:23
+ * Created 25/06/2026 - 10:15
  */
 @Service
-@AllArgsConstructor
+@Transactional
 public class DeviceServiceImpl implements DeviceService {
-    @Autowired
-    private DeviceRepository deviceRepository;
-    @Autowired
-    private ModelMapper modelMapper;
+    private final DeviceRepository deviceRepository;
+    private final DeviceMap deviceMap;
+
+    public DeviceServiceImpl(DeviceRepository deviceRepository, DeviceMap deviceMap) {
+        this.deviceRepository = deviceRepository;
+        this.deviceMap = deviceMap;
+    }
+
     @Override
-    public Device createDevice(Device device) {
-        if(device.getDeviceName() != null) {
-            device.setDeviceName(device.getDeviceName().toUpperCase());
-        }
-        device = deviceRepository.save(device);
-        return modelMapper.map(device, Device.class);
+    public DeviceDTO createDevice(DeviceDTO deviceDTO) {
+        // 1. Check if the controller successfully passed the data
+        System.out.println("Incoming DTO: " + deviceDTO);
+
+        Device device = deviceMap.toEntity(deviceDTO);
+
+        // 2. Check if MapStruct successfully converted it to the entity
+        System.out.println("Mapped Entity Name: " + device.getDeviceName());
+
+        Device savedDevice = deviceRepository.save(device);
+        return deviceMap.toDTO(savedDevice);
+    }
+
+    @Override
+    public List<DeviceDTO> getAllDevices() {
+        List<Device> devices = deviceRepository.findAll();
+        return deviceMap.toDTOList(devices);
+    }
+
+    @Override
+    public DeviceDTO getDeviceById(Long id) {
+        return null;
     }
 
     @Override
@@ -41,24 +58,7 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Device getDevById(Long id) {
-        Device dv = deviceRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Account record not found with Account ID: \" + id"));
-        return modelMapper.map(dv, Device.class);
-    }
+    public void deleteDevice(Long id) {
 
-    @Override
-    public List<DeviceDTO> getAll() {
-        List<Device> dev = deviceRepository.findAll();
-        return dev.stream()
-                .map(adur -> modelMapper.map(adur, DeviceDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public void deleteDevById(Long id) {
-        Device existingDev = deviceRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException(id + "not found"));
-        deviceRepository.delete(existingDev);
     }
 }

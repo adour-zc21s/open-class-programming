@@ -2,8 +2,10 @@ package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.service.BranchService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.NoSuchElementException;
  */
 @RestController
 @RequestMapping("/api/v1/branches")
+@PreAuthorize("hasAnyRole('ADMIN','USER')")
+@Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
 public class BranchController {
 
     private final BranchService branchService;
@@ -38,6 +42,7 @@ public class BranchController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<List<BranchDTO>> getAllBranches() {
         return ResponseEntity.ok(branchService.getAllBranches());
     }
