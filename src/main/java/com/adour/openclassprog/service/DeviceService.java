@@ -15,6 +15,7 @@ public interface DeviceService {
     DeviceDTO createDevice(DeviceDTO deviceDTO);
     List<DeviceDTO> getAllDevices();
     DeviceDTO getDeviceById(Long id);
+    List<DeviceDTO> searchDeviceByDeviceName(String deviceName);
     DeviceDTO updateDevice(Long id, DeviceDTO deviceDTO);
     void deleteDevice(Long id);
 }

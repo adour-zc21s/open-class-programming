@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /*
  * @author {Open Class Programming}
@@ -53,6 +54,17 @@ public class DeviceServiceImpl implements DeviceService {
         Device dv = deviceRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account record not found with Account ID: " + id));
         return deviceMap.toDTO(dv);
+    }
+    @Override
+    public List<DeviceDTO> searchDeviceByDeviceName(String deviceName) {
+        List<Device> devices = deviceRepository.findByDeviceNameContainingIgnoreCase(deviceName);
+        // 1. Check if the repository returned an empty list right here in the service
+        if (devices.isEmpty()) {
+            throw new NoSuchElementException("No device record found with name: " + deviceName);
+        }
+        return devices.stream()
+                .map(deviceMap::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -4,6 +4,8 @@ import com.adour.openclassprog.model.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /*
  * @author {Open Class Programming}
  * Abdur Rahman Wahid - X-Sari
@@ -12,4 +14,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DeviceRepository extends JpaRepository<Device, Long> {
+    // Automatically generates: SELECT * FROM device WHERE LOWER(device_name) LIKE LOWER('%?%')
+    List<Device> findByDeviceNameContainingIgnoreCase(String deviceName);
 }

@@ -51,6 +51,14 @@ public class DeviceController {
         DeviceDTO device = deviceService.getDeviceById(id);
         return ResponseEntity.ok(device);
     }
+//    http://localhost:8081/api/dev/search?name=device_name
+    @GetMapping("/search")
+    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
+    public ResponseEntity<List<DeviceDTO>> searchDeviceByDeviceName(@RequestParam("name") String deviceName) {
+        // Throws the exception catch in service implementation
+        List<DeviceDTO> devices = deviceService.searchDeviceByDeviceName(deviceName);
+        return ResponseEntity.ok(devices);
+    }
     @GetMapping("/types")
     public List<DeviceType> getDeviceTypes() {
         return Arrays.asList(DeviceType.values());
