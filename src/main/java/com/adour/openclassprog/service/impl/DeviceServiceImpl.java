@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /*
  * @author {Open Class Programming}
@@ -49,7 +50,9 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public DeviceDTO getDeviceById(Long id) {
-        return null;
+        Device dv = deviceRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Account record not found with Account ID: " + id));
+        return deviceMap.toDTO(dv);
     }
 
     @Override
