@@ -63,21 +63,22 @@ public class DeviceController {
             @RequestBody DeviceDTO deviceDTO) {
         return ResponseEntity.ok(deviceService.updateDevice(id, deviceDTO));
     }
-//    @DeleteMapping("/{id}")
-//    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
-//    public ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
-//        deviceService.deleteDevice(id);
-//        return ResponseEntity.noContent().build();
-//    }
+    // Standart RESTful design with response code HTTP 204 No Content
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, String>> deleteDevice(@PathVariable Long id) {
+    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
         deviceService.deleteDevice(id);
-
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Device successfully deleted");
-
-        return ResponseEntity.ok(response); // Sends HTTP 200 with JSON body
+        return ResponseEntity.noContent().build();
     }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Map<String, String>> deleteDevice(@PathVariable Long id) {
+//        deviceService.deleteDevice(id);
+//
+//        Map<String, String> response = new HashMap<>();
+//        response.put("message", "Device successfully deleted");
+//
+//        return ResponseEntity.ok(response); // Sends HTTP 200 with JSON body
+//    }
     @GetMapping("/types")
     public List<DeviceType> getDeviceTypes() {
         return Arrays.asList(DeviceType.values());
