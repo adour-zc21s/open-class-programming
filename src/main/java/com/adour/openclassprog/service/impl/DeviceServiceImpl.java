@@ -81,6 +81,9 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public void deleteDevice(Long id) {
-
+        if (!deviceRepository.existsById(id)) {
+            throw new NoSuchElementException("Device not found with id: " + id);
+        }
+        deviceRepository.deleteById(id);
     }
 }

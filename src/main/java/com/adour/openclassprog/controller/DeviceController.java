@@ -1,11 +1,7 @@
 package com.adour.openclassprog.controller;
 
-import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.DeviceDTO;
 import com.adour.openclassprog.enums.DeviceType;
-import com.adour.openclassprog.model.Account;
-import com.adour.openclassprog.model.Device;
-import com.adour.openclassprog.service.BranchService;
 import com.adour.openclassprog.service.DeviceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -15,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Map;
+import java.util.HashMap;
 
 /*
  * @author {Open Class Programming}
@@ -65,6 +62,21 @@ public class DeviceController {
             @PathVariable Long id,
             @RequestBody DeviceDTO deviceDTO) {
         return ResponseEntity.ok(deviceService.updateDevice(id, deviceDTO));
+    }
+//    @DeleteMapping("/{id}")
+//    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
+//    public ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
+//        deviceService.deleteDevice(id);
+//        return ResponseEntity.noContent().build();
+//    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, String>> deleteDevice(@PathVariable Long id) {
+        deviceService.deleteDevice(id);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Device successfully deleted");
+
+        return ResponseEntity.ok(response); // Sends HTTP 200 with JSON body
     }
     @GetMapping("/types")
     public List<DeviceType> getDeviceTypes() {
