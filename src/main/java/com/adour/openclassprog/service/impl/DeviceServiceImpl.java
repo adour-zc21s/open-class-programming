@@ -1,7 +1,9 @@
 package com.adour.openclassprog.service.impl;
 
 import com.adour.openclassprog.config.map.DeviceMap;
+import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.DeviceDTO;
+import com.adour.openclassprog.model.Branch;
 import com.adour.openclassprog.model.Device;
 import com.adour.openclassprog.repository.DeviceRepository;
 import com.adour.openclassprog.service.DeviceService;
@@ -69,7 +71,12 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public DeviceDTO updateDevice(Long id, DeviceDTO deviceDTO) {
-        return null;
+        Device existingDevice = deviceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Branch not found with id: " + id));
+        // Map changes directly onto the managed JPA entity
+        deviceMap.updateEntityFromDto(deviceDTO, existingDevice);
+//        Device updatedDevice = deviceRepository.save(existingDevice);
+        return deviceMap.toDTO(deviceRepository.save(existingDevice));
     }
 
     @Override

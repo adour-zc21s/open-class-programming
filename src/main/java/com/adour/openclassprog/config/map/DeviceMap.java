@@ -7,6 +7,7 @@ import com.adour.openclassprog.model.Device;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
@@ -16,10 +17,14 @@ import java.util.List;
  * +62 813 8522 9903
  * Created 25/06/2026 - 10:08
  */
-@Mapper(componentModel = "spring")
+@Mapper(
+        componentModel = "spring",
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE // 💡 THE FIX
+)
 public interface DeviceMap {
     DeviceDTO toDTO(Device device);
 
+    @Mapping(source = "id", target = "id")
     @Mapping(source = "deviceName", target = "deviceName")
     @Mapping(source = "deviceType", target = "deviceType")
     @Mapping(source = "user", target = "user")
@@ -28,5 +33,6 @@ public interface DeviceMap {
     List<DeviceDTO> toDTOList(List<Device> devices);
 
     // Useful for PUT/PATCH updates
+    @Mapping(target = "id", ignore = true)
     void updateEntityFromDto(DeviceDTO deviceDTO, @MappingTarget Device device);
 }

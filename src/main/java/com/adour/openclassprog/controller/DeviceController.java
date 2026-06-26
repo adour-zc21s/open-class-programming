@@ -47,17 +47,24 @@ public class DeviceController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
-    public ResponseEntity<DeviceDTO> getAccById(@PathVariable Long id){
-        DeviceDTO device = deviceService.getDeviceById(id);
-        return ResponseEntity.ok(device);
+    public ResponseEntity<DeviceDTO> getDeviceById(@PathVariable Long id){
+        DeviceDTO deviceDTO = deviceService.getDeviceById(id);
+        return ResponseEntity.ok(deviceDTO);
     }
 //    http://localhost:8081/api/dev/search?name=device_name
     @GetMapping("/search")
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
-    public ResponseEntity<List<DeviceDTO>> searchDeviceByDeviceName(@RequestParam("name") String deviceName) {
+    public ResponseEntity<List<DeviceDTO>> searchDeviceByDeviceName(
+            @RequestParam("name") String deviceName) {
         // Throws the exception catch in service implementation
         List<DeviceDTO> devices = deviceService.searchDeviceByDeviceName(deviceName);
         return ResponseEntity.ok(devices);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<DeviceDTO> updateDevice(
+            @PathVariable Long id,
+            @RequestBody DeviceDTO deviceDTO) {
+        return ResponseEntity.ok(deviceService.updateDevice(id, deviceDTO));
     }
     @GetMapping("/types")
     public List<DeviceType> getDeviceTypes() {
