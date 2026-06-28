@@ -10,14 +10,14 @@ import java.util.List;
  * @author {Open Class Programming}
  * Abdur Rahman Wahid - X-Sari
  * +62 813 8522 9903
- * Created 12/06/2026 - 13:12
+ * Created 28/06/2026 - 22:07
  */
 public interface AccountService {
-    Account createAcc(Account acc);
-    Account deposit(Long id, double amount) throws AccountNotFoundException;
-    Account withdraw(Long id, double amount) throws AccountNotFoundException;
-    Account getAccById(Long id);
-    List<AccountDTO> ambilSemua();
-    AccountDTO updateAcc(Long id, AccountDTO updateAccDTO);
-    void hapusAccById(Long id);
+    AccountDTO createAccount(AccountDTO accountDTO);
+    AccountDTO deposit(Long id, double amount) throws AccountNotFoundException;
+    AccountDTO withdraw(Long id, double amount) throws AccountNotFoundException;
+    List<AccountDTO> getAllAccount();
+    AccountDTO getAccountById(Long id);
+    AccountDTO updateAccount(Long id, AccountDTO accountDTO);
+    void deleteAccount(Long id);
 }

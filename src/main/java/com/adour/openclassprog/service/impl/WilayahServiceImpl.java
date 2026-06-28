@@ -1,7 +1,6 @@
 package com.adour.openclassprog.service.impl;
 
 import com.adour.openclassprog.config.map.WilayahMap;
-import com.adour.openclassprog.dto.DeviceDTO;
 import com.adour.openclassprog.dto.WilayahDTO;
 import com.adour.openclassprog.model.Wilayah;
 import com.adour.openclassprog.repository.WilayahRepository;
@@ -53,6 +52,7 @@ public class WilayahServiceImpl implements WilayahService {
     public WilayahDTO updateWilayah(Long id, WilayahDTO wilayahDTO) {
         Wilayah existingWilayah = wilayahRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Wilayah not found with id: " +id));
+
         wilayahMap.updateEntityFromDTO(wilayahDTO, existingWilayah);
         return wilayahMap.toDTO(wilayahRepository.save(existingWilayah));
     }

@@ -1,95 +1,79 @@
 package com.adour.openclassprog.service.impl;
 
+import com.adour.openclassprog.config.map.AccountMap;
 import com.adour.openclassprog.dto.AccountDTO;
 import com.adour.openclassprog.model.Account;
 import com.adour.openclassprog.repository.AccountRepository;
 import com.adour.openclassprog.service.AccountService;
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 /*
  * @author {Open Class Programming}
  * Abdur Rahman Wahid - X-Sari
  * +62 813 8522 9903
- * Created 12/06/2026 - 13:13
+ * Created 28/06/2026 - 22:10
  */
-
 @Service
-@AllArgsConstructor
+@Transactional
 public class AccountServiceImpl implements AccountService {
+    private final AccountRepository accountRepository;
+    private final AccountMap accountMap;
 
-    @Autowired
-    private AccountRepository accRepository;
-    @Autowired
-    private ModelMapper modelMapper;
-    @Override
-    public Account createAcc(Account acc) {
-        if (acc.getName() != null) {
-            acc.setName(acc.getName().toUpperCase());
-        }
-        acc = accRepository.save(acc);
-        return modelMapper.map(acc, Account.class);
+    public AccountServiceImpl(AccountRepository accountRepository, AccountMap accountMap) {
+        this.accountRepository = accountRepository;
+        this.accountMap = accountMap;
     }
 
     @Override
-    public Account deposit(Long id, double amount) throws AccountNotFoundException {
-        Account acc = accRepository.findById(id)
-                .orElseThrow(() -> new AccountNotFoundException("Account does not exist"));
+    public AccountDTO createAccount(AccountDTO accountDTO) {
+        return null;
+    }
+
+    @Override
+    public AccountDTO deposit(Long id, double amount) throws AccountNotFoundException {
+        Account acc = accountRepository.findById(id)
+                .orElseThrow(()-> new AccountNotFoundException("Account not found with id: " + id));
         double total = acc.getBalance() + amount;
         acc.setBalance(total);
-        Account simpanAcc = accRepository.save(acc);
-        return modelMapper.map(simpanAcc, Account.class);
+        Account simpan = accountRepository.save(acc);
+        return accountMap.toDTO(simpan);
     }
 
     @Override
-    public Account withdraw(Long id, double amount) throws AccountNotFoundException {
-        Account acc = accRepository.findById(id)
-                .orElseThrow(() -> new AccountNotFoundException("Account does not exist"));
+    public AccountDTO withdraw(Long id, double amount) throws AccountNotFoundException {
+        Account acc = accountRepository.findById(id)
+                .orElseThrow(()-> new AccountNotFoundException("Account not found with id: " + id));
         if(acc.getBalance() < amount) {
             throw new RuntimeException("Insufficient amount");
         }
         double total = acc.getBalance() - amount;
         acc.setBalance(total);
-        Account simpanTransaksi = accRepository.save(acc);
-        return modelMapper.map(simpanTransaksi, Account.class);
+        Account simpan = accountRepository.save(acc);
+        return accountMap.toDTO(simpan);
     }
 
     @Override
-    public Account getAccById(Long id) {
-        Account acc = accRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Account record not found with Account ID: " + id));
-        return modelMapper.map(acc, Account.class);
+    public List<AccountDTO> getAllAccount() {
+        List<Account> acc = accountRepository.findAll();
+        return accountMap.toDTOList(acc);
     }
 
     @Override
-    public List<AccountDTO> ambilSemua() {
-        List<Account> acc = accRepository.findAll();
-        return acc.stream()
-                .map(acc1 -> modelMapper.map(acc1, AccountDTO.class))
-                .collect(Collectors.toList());
+    public AccountDTO getAccountById(Long id) {
+        return null;
     }
 
     @Override
-    public AccountDTO updateAcc(Long id, AccountDTO updateAccDTO) {
-        Account existingAcc = accRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Account ID not found"));
-        // Maps updateCrmDto properties directly onto the existing entity, ignoring nulls
-        modelMapper.map(updateAccDTO, existingAcc);
-        Account updatedAcc1 = accRepository.save(existingAcc);
-        return modelMapper.map(updatedAcc1, AccountDTO.class);
+    public AccountDTO updateAccount(Long id, AccountDTO accountDTO) {
+        return null;
     }
 
     @Override
-    public void hapusAccById(Long id) {
-        Account existingAcc = accRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException(id + "not found"));
-        accRepository.delete(existingAcc);
+    public void deleteAccount(Long id) {
+
     }
 }

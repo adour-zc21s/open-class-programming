@@ -1,5 +1,6 @@
 package com.adour.openclassprog.controller;
 
+import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.BrandDTO;
 import com.adour.openclassprog.model.Brand;
 import com.adour.openclassprog.service.BrandService;
@@ -37,5 +38,11 @@ public class BrandController {
     @GetMapping
     public ResponseEntity<List<BrandDTO>> getAllBrand() {
         return ResponseEntity.ok(brandService.getAllBrand());
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<BrandDTO> updateBrand(
+            @PathVariable Long id,
+            @RequestBody BrandDTO brandDTO) {
+        return ResponseEntity.ok(brandService.updateBrand(id, brandDTO));
     }
 }
