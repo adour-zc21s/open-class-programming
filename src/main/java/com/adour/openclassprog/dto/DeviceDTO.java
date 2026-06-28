@@ -16,6 +16,7 @@ public record DeviceDTO(
    String serialNumber,
    String macAddress,
    String user,
+   String description,
    Date purchaseDate,
    Date warrantyExpired
 ) {

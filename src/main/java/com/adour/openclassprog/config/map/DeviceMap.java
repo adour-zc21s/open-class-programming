@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Mapper(
         componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE // 💡 THE FIX
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
 public interface DeviceMap {
     DeviceDTO toDTO(Device device);

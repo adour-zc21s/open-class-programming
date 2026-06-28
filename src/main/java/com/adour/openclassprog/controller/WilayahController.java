@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/wilayah")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
-@Tag(name = "Authorization", description = "The Auhthorization API contains a secure ... method")
+@Tag(name = "Authorization", description = "The Authorization API contains a secure ... method")
 public class WilayahController {
     private final WilayahService wilayahService;
 

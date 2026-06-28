@@ -5,6 +5,7 @@ import com.adour.openclassprog.model.Branch;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
@@ -14,17 +15,19 @@ import java.util.List;
  * +62 813 8522 9903
  * Created 24/06/2026 - 17:27
  */
-@Mapper(componentModel = "spring")
+@Mapper(
+        componentModel = "spring",
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
+)
 public interface BranchMap {
     BranchDTO toDTO(Branch branch);
-
-    @Mapping(source = "code", target = "code")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "address", target = "address")
     Branch toEntity(BranchDTO branchDTO);
 
     List<BranchDTO> toDTOList(List<Branch> branches);
 
     // Useful for PUT/PATCH updates
-    void updateEntityFromDto(BranchDTO branchDTO, @MappingTarget Branch branch);
+    @Mapping(target = "id", ignore = true)
+    void updateEntityFromDto(
+            BranchDTO branchDTO,
+            @MappingTarget Branch branch);
 }

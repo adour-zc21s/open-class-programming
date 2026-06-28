@@ -31,6 +31,7 @@ public class Device {
     @Column(name = "serial_number")
     private String serialNumber;
     private String status;
+    private String description;
 
     // Network and Connectivity
     @Column(name = "ip_address")
@@ -127,6 +128,13 @@ public class Device {
 
     public void setUser(String user) {
         this.user = user;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLocation() {

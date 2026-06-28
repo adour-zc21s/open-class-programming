@@ -9,8 +9,6 @@ import lombok.*;
  * +62 813 8522 9903
  * Created 24/06/2026 - 17:24
  */
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "BRANCHES")
 public class Branch {
@@ -25,7 +23,6 @@ public class Branch {
     private String name;
 
     private String address;
-    // --- WRITE ACCESSORS (SETTERS) REQUIRED BY MAPSTRUCT ---
     public void setId(Long id) {
         this.id = id;
     }
@@ -41,8 +38,6 @@ public class Branch {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    // --- READ ACCESSORS (GETTERS) ---
     public Long getId() { return id; }
     public String getCode() { return code; }
     public String getName() { return name; }

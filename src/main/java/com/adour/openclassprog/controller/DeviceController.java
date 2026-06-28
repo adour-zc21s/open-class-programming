@@ -37,7 +37,6 @@ public class DeviceController {
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
     @GetMapping
-    @PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<List<DeviceDTO>> getAllDevices() {
         return ResponseEntity.ok(deviceService.getAllDevices());
     }
