@@ -1,6 +1,9 @@
 package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.dto.BranchDTO;
+import com.adour.openclassprog.model.Branch;
+import com.adour.openclassprog.model.Brand;
+import com.adour.openclassprog.repository.BranchRepository;
 import com.adour.openclassprog.service.BranchService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -24,9 +27,12 @@ import java.util.NoSuchElementException;
 public class BranchController {
 
     private final BranchService branchService;
+    private final BranchRepository branchRepository;
 
-    public BranchController(BranchService branchService) {
+    public BranchController(BranchService branchService,
+                            BranchRepository branchRepository) {
         this.branchService = branchService;
+        this.branchRepository = branchRepository;
     }
 
     @PostMapping
@@ -57,6 +63,12 @@ public class BranchController {
             @PathVariable Long id,
             @RequestBody BranchDTO branchDTO) {
         return ResponseEntity.ok(branchService.updateBranch(id, branchDTO));
+    }
+
+    @GetMapping("/search")
+    public List<BranchDTO> searchUsers(@RequestParam String letter) {
+        // Calls the automatic case-insensitive containing query
+        return branchRepository.findByNameContainingIgnoreCase(letter);
     }
 
     @DeleteMapping("/{id}")

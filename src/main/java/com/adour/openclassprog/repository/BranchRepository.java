@@ -1,9 +1,11 @@
 package com.adour.openclassprog.repository;
 
+import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.model.Branch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /*
@@ -14,5 +16,5 @@ import java.util.Optional;
  */
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
-    Optional<Branch> findByCode(String code);
+    List<BranchDTO> findByNameContainingIgnoreCase(String name);
 }
