@@ -1,5 +1,7 @@
 package com.adour.openclassprog.dto;
 
+import jakarta.persistence.Column;
+
 /*
  * @author {Open Class Programming}
  * Abdur Rahman Wahid - X-Sari
@@ -10,5 +12,13 @@ public record BranchDTO(
     Long id,
     String code,
     String name,
-    String address
+    String namaPt,
+    String npwp,
+    String namaIsp1,
+    String noIsp1,
+    String namaIsp2,
+    String noIsp2,
+    String emailDigunakan,
+    String address,
+    String description
 ) {}
