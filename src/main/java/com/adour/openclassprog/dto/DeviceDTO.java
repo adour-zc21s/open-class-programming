@@ -14,6 +14,7 @@ public record DeviceDTO(
    String deviceType,
    String manufacture,
    String serialNumber,
+   String ipAddress,
    String macAddress,
    String user,
    String description,
