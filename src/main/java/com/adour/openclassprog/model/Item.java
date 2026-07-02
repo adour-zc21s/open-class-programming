@@ -1,6 +1,10 @@
 package com.adour.openclassprog.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /*
  * @author {Open Class Programming}
@@ -9,6 +13,10 @@ import jakarta.persistence.*;
  * Created 02/07/2026 - 13:40
  */
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "ITEMS")
 public class Item {
     @Id
@@ -16,60 +24,7 @@ public class Item {
     private Long id;
     private String code;
     private String name;
-    private String description;
-    @Column(name = "stock_quantity")
-    private int stockQuantity;
-    @Column(name = "unit_price")
-    private double unitPrice;
+    private Double price;
+    private Integer stockQuantity;
 
-    public Item() {
-    }
-
-    public Item(String code, String name, String description, int stockQuantity, double unitPrice) {
-        this.code = code;
-        this.name = name;
-        this.description = description;
-        this.stockQuantity = stockQuantity;
-        this.unitPrice = unitPrice;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
-
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
-
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
 }
