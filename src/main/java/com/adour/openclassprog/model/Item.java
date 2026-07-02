@@ -17,18 +17,19 @@ public class Item {
     private String code;
     private String name;
     private String description;
-    private int qty;
+    @Column(name = "stock_quantity")
+    private int stockQuantity;
     @Column(name = "unit_price")
     private double unitPrice;
 
     public Item() {
     }
 
-    public Item(String code, String name, String description, int qty, double unitPrice) {
+    public Item(String code, String name, String description, int stockQuantity, double unitPrice) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.qty = qty;
+        this.stockQuantity = stockQuantity;
         this.unitPrice = unitPrice;
     }
 
@@ -56,12 +57,12 @@ public class Item {
         this.description = description;
     }
 
-    public int getQty() {
-        return qty;
+    public int getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setQty(int qty) {
-        this.qty = qty;
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public double getUnitPrice() {

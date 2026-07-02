@@ -15,7 +15,7 @@ public record ItemDTO(
     String code,
     String name,
     String description,
-    int qty,
+    int stockQuantity,
     double unitPrice
 ) {
 }
