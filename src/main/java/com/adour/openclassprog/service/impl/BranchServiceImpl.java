@@ -28,7 +28,6 @@ public class BranchServiceImpl implements BranchService {
         this.branchRepository = branchRepository;
         this.branchMap = branchMap;
     }
-
     @Override
     public BranchDTO createBranch(BranchDTO branchDTO) {
         // 1. Check if the controller successfully passed the data

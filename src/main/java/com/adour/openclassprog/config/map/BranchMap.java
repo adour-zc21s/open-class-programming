@@ -22,7 +22,6 @@ import java.util.List;
 public interface BranchMap {
     BranchDTO toDTO(Branch branch);
     Branch toEntity(BranchDTO branchDTO);
-
     List<BranchDTO> toDTOList(List<Branch> branches);
 
     // Useful for PUT/PATCH updates

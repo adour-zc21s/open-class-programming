@@ -2,6 +2,8 @@ package com.adour.openclassprog.repository;
 
 import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.model.Branch;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +19,5 @@ import java.util.Optional;
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
     List<BranchDTO> findByNameContainingIgnoreCase(String name);
+//    Page<Branch> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

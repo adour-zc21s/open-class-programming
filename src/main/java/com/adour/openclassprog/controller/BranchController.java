@@ -1,18 +1,21 @@
 package com.adour.openclassprog.controller;
 
+import com.adour.openclassprog.config.map.BranchMap;
+import com.adour.openclassprog.config.map.BrandMap;
 import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.model.Branch;
-import com.adour.openclassprog.model.Brand;
 import com.adour.openclassprog.repository.BranchRepository;
 import com.adour.openclassprog.service.BranchService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /*
  * @author {Open Class Programming}
@@ -28,11 +31,13 @@ public class BranchController {
 
     private final BranchService branchService;
     private final BranchRepository branchRepository;
+    private final BranchMap branchMap;
 
     public BranchController(BranchService branchService,
-                            BranchRepository branchRepository) {
+                            BranchRepository branchRepository, BrandMap brandMap, BranchMap branchMap) {
         this.branchService = branchService;
         this.branchRepository = branchRepository;
+        this.branchMap = branchMap;
     }
 
     @PostMapping
@@ -70,6 +75,19 @@ public class BranchController {
         // Calls the automatic case-insensitive containing query
         return branchRepository.findByNameContainingIgnoreCase(letter);
     }
+
+//    @GetMapping("/search-paginated")
+//    public Page<BranchDTO> searchUsersWithMetadata(
+//            @RequestParam String letter,
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "10") int size) {
+//
+//        Pageable pageable = PageRequest.of(page, size);
+//        Page<Branch> branchPage = branchRepository.findByNameContainingIgnoreCase(letter, pageable);
+//
+//        // MapStruct maps individual items while preserving the Page container metadata
+//        return branchPage.map(branchMap::toDTO);
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBranch(@PathVariable Long id) {
