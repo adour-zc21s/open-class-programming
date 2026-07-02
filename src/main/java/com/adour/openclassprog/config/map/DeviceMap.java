@@ -32,5 +32,7 @@ public interface DeviceMap {
 
     // Useful for PUT/PATCH updates
     @Mapping(target = "id", ignore = true)
-    void updateEntityFromDto(DeviceDTO deviceDTO, @MappingTarget Device device);
+    void updateEntityFromDto(
+            DeviceDTO deviceDTO,
+            @MappingTarget Device device);
 }
