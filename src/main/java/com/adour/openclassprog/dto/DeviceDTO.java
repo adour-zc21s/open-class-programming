@@ -16,6 +16,7 @@ public record DeviceDTO(
    String serialNumber,
    String ipAddress,
    String macAddress,
+   String location,
    String user,
    String description,
    Date purchaseDate,
