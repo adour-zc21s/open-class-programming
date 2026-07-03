@@ -12,6 +12,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
 server:
+  address: 10.101.90.57
   port: 8081
 application:
   security:
