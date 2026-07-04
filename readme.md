@@ -16,7 +16,7 @@ A comprehensive Spring Boot application demonstrating JWT-based authentication a
 
 ## 🛠️ Tech Stack
 
-- **Java 17**
+- **Java 21**
 - **Spring Boot 4.0.6**
 - **Spring Security 7**
 - **Spring Data JPA**
