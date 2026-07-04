@@ -46,6 +46,7 @@ public class BranchServiceImpl implements BranchService {
     @Transactional(readOnly = true)
     public List<BranchDTO> getAllBranches() {
         List<Branch> branches = branchRepository.findAll();
+        // FIX: Add the method name "toDTOList"
         return branchMap.toDTOList(branches);
     }
 

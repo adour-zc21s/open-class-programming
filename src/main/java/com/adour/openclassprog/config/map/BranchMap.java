@@ -6,27 +6,56 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
+@Component
 
-/*
- * @author {Open Class Programming}
- * Abdur Rahman Wahid - X-Sari
- * +62 813 8522 9903
- * Created 24/06/2026 - 17:27
- */
 @Mapper(
         componentModel = "spring",
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
-public interface BranchMap {
-    BranchDTO toDTO(Branch branch);
-    Branch toEntity(BranchDTO branchDTO);
-    List<BranchDTO> toDTOList(List<Branch> branches);
+public interface BranchMap { // Changed from 'class' to 'interface'
 
-    // Useful for PUT/PATCH updates
-    @Mapping(target = "id", ignore = true)
-    void updateEntityFromDto(
-            BranchDTO branchDTO,
-            @MappingTarget Branch branch);
+    // MapStruct will automatically generate this method's body
+    void updateEntityFromDto(BranchDTO dto, @MappingTarget Branch branch);
+
+    default BranchDTO toDTO(Branch branch){
+        if(branch == null) {
+            return null;
+        }
+        return new BranchDTO(
+                branch.getId(),
+                branch.getCode(), branch.getName(), branch.getNamaPt(),
+                branch.getNpwp(),
+                branch.getNamaIsp1(),
+                branch.getNoIsp1(),
+                branch.getNamaIsp2(),
+                branch.getNoIsp2(),
+                branch.getEmailDigunakan(),
+                branch.getAddress(),
+                branch.getDescription()
+        );
+    }
+
+    default Branch toEntity(BranchDTO dto) {
+        if (dto == null){
+            return null;
+        }
+        Branch branch = new Branch();
+        branch.setId(dto.id());
+        branch.setCode(dto.code());
+        // Add other source mappings here if needed
+        return branch;
+    }
+
+    default List<BranchDTO> toDTOList(List<Branch> branches) {
+        if (branches == null) {
+            return null;
+        }
+        return branches.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
 }

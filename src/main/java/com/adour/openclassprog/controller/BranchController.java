@@ -1,15 +1,10 @@
 package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.config.map.BranchMap;
-import com.adour.openclassprog.config.map.BrandMap;
 import com.adour.openclassprog.dto.BranchDTO;
-import com.adour.openclassprog.model.Branch;
 import com.adour.openclassprog.repository.BranchRepository;
 import com.adour.openclassprog.service.BranchService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,7 +29,7 @@ public class BranchController {
     private final BranchMap branchMap;
 
     public BranchController(BranchService branchService,
-                            BranchRepository branchRepository, BrandMap brandMap, BranchMap branchMap) {
+                            BranchRepository branchRepository, BranchMap branchMap) {
         this.branchService = branchService;
         this.branchRepository = branchRepository;
         this.branchMap = branchMap;
