@@ -24,6 +24,8 @@ public interface CustomerMap {
     Customer toEntity(CustomerDTO customerDTO);
     List<CustomerDTO> toDTOList(List<Customer> customers);
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "accountNumber", ignore = true)
+    @Mapping(target = "lastName", ignore = true)
     void updateEntityFromDto(
             CustomerDTO customerDTO,
             @MappingTarget Customer customer
