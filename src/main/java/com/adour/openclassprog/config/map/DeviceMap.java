@@ -26,6 +26,9 @@ public interface DeviceMap {
     @Mapping(source = "deviceName", target = "deviceName")
     @Mapping(source = "deviceType", target = "deviceType")
     @Mapping(source = "user", target = "user")
+    @Mapping(target = "modelNumber", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "department", ignore = true)
     Device toEntity(DeviceDTO deviceDTO);
 
     List<DeviceDTO> toDTOList(List<Device> devices);

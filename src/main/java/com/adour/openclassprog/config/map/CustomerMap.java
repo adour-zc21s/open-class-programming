@@ -21,6 +21,8 @@ import java.util.List;
 )
 public interface CustomerMap {
     CustomerDTO toDTO(Customer customer);
+    @Mapping(target = "accountNumber", ignore = true)
+    @Mapping(target = "lastName", ignore = true)
     Customer toEntity(CustomerDTO customerDTO);
     List<CustomerDTO> toDTOList(List<Customer> customers);
     @Mapping(target = "id", ignore = true)
