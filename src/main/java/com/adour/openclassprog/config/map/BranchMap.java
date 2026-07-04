@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
 public interface BranchMap { // Changed from 'class' to 'interface'
-
+    @Mapping(target = "isActive", ignore = true)
+    @Mapping(target = "branchName", ignore = true)
     // MapStruct will automatically generate this method's body
     void updateEntityFromDto(BranchDTO dto, @MappingTarget Branch branch);
 
@@ -25,7 +26,9 @@ public interface BranchMap { // Changed from 'class' to 'interface'
         }
         return new BranchDTO(
                 branch.getId(),
-                branch.getCode(), branch.getName(), branch.getNamaPt(),
+                branch.getCode(),
+                branch.getName(),
+                branch.getNamaPt(),
                 branch.getNpwp(),
                 branch.getNamaIsp1(),
                 branch.getNoIsp1(),
