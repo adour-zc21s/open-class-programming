@@ -17,6 +17,7 @@ import java.util.List;
  * Created 27/06/2026 - 10:10
  */
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/wilayah")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API contains a secure ... method")

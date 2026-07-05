@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")

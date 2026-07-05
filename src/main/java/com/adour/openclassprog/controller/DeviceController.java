@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 /*
  * @author {Open Class Programming}
@@ -21,6 +19,7 @@ import java.util.HashMap;
  * Created 25/06/2026 - 10:22
  */
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/dev")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")

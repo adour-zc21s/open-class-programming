@@ -19,6 +19,7 @@ import java.util.List;
  * Created 24/06/2026 - 18:57
  */
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/v1/branches")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
