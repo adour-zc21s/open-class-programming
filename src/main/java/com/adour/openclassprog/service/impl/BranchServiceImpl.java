@@ -31,12 +31,12 @@ public class BranchServiceImpl implements BranchService {
     @Override
     public BranchDTO createBranch(BranchDTO branchDTO) {
         // 1. Check if the controller successfully passed the data
-        System.out.println("Incoming DTO: " + branchDTO);
+        // System.out.println("Incoming DTO: " + branchDTO);
 
         Branch branch = branchMap.toEntity(branchDTO);
 
         // 2. Check if MapStruct successfully converted it to the entity
-        System.out.println("Mapped Entity Name: " + branch.getName());
+        // System.out.println("Mapped Entity Name: " + branch.getName());
 
         Branch savedBranch = branchRepository.save(branch);
         return branchMap.toDTO(savedBranch);
@@ -46,7 +46,6 @@ public class BranchServiceImpl implements BranchService {
     @Transactional(readOnly = true)
     public List<BranchDTO> getAllBranches() {
         List<Branch> branches = branchRepository.findAll();
-        // FIX: Add the method name "toDTOList"
         return branchMap.toDTOList(branches);
     }
 
