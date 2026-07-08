@@ -10,7 +10,10 @@ import java.util.Date;
  */
 public record DeviceDTO(
    Long id,
+   String inventoryCode,
    String deviceName,
+   String password,
+   String passwordPortal,
    String deviceType,
    String manufacture,
    String serialNumber,
@@ -18,6 +21,7 @@ public record DeviceDTO(
    String macAddress,
    String location,
    String user,
+   String branchName,
    String description,
    Date purchaseDate,
    Date warrantyExpired
