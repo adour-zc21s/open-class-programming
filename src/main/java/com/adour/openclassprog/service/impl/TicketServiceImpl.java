@@ -85,5 +85,6 @@ public class TicketServiceImpl implements TicketService {
         if(!ticketRepository.existsById(id)) {
             throw new NoSuchElementException("Ticket not found with id: " + id);
         }
+        ticketRepository.deleteById(id);
     }
 }
