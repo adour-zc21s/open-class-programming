@@ -6,7 +6,7 @@ package com.adour.openclassprog.enums;
  * +62 813 8522 9903
  * Created 12/07/2026 - 15:52
  */
-public enum Department {
+public enum Departments {
     Accounting("Accounting"),
     Admin("Administration"),
     Aftersales("Aftersales"),
@@ -16,13 +16,14 @@ public enum Department {
     HRD("HRD"),
     Importation("Importation"),
     IT("IT"),
+    Marketing("Marketing"),
     Others("Other ..."),
     Recruitment("Recruitment"),
     Sales("Sales"),
     Tax("Tax");
     private final String DisplayDepartment;
 
-    Department(String displayDepartment) {
+    Departments(String displayDepartment) {
         DisplayDepartment = displayDepartment;
     }
 }

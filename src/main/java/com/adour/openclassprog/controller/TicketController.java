@@ -2,7 +2,7 @@ package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.dto.TicketCommentDTO;
 import com.adour.openclassprog.dto.TicketDTO;
-import com.adour.openclassprog.enums.Department;
+import com.adour.openclassprog.enums.Departments;
 import com.adour.openclassprog.service.TicketCommentService;
 import com.adour.openclassprog.service.TicketService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,8 +67,8 @@ public class TicketController {
         List<TicketCommentDTO> comments = ticketCommentService.getCommentsByTicketId(ticketId);
         return ResponseEntity.ok(comments);
     }
-    @GetMapping("/Departments")
-    public List<Department> getDepartments(){
-        return Arrays.asList(Department.values());
+    @GetMapping("/departments")
+    public List<Departments> getDepartments(){
+        return Arrays.asList(Departments.values());
     }
 }
