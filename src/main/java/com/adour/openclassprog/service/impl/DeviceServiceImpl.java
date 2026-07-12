@@ -1,9 +1,7 @@
 package com.adour.openclassprog.service.impl;
 
 import com.adour.openclassprog.config.map.DeviceMap;
-import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.DeviceDTO;
-import com.adour.openclassprog.model.Branch;
 import com.adour.openclassprog.model.Device;
 import com.adour.openclassprog.repository.DeviceRepository;
 import com.adour.openclassprog.service.DeviceService;
@@ -36,7 +34,7 @@ public class DeviceServiceImpl implements DeviceService {
         // 1. Check if the controller successfully passed the data
         System.out.println("Incoming DTO: " + deviceDTO);
 
-        Device device = deviceMap.toEntity(deviceDTO);
+            Device device = deviceMap.toEntity(deviceDTO);
 
         // 2. Check if MapStruct successfully converted it to the entity
         System.out.println("Mapped Entity Name: " + device.getDeviceName());
