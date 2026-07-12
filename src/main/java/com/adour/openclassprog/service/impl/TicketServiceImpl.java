@@ -4,9 +4,14 @@ import com.adour.openclassprog.config.map.TicketMap;
 import com.adour.openclassprog.dto.TicketDTO;
 import com.adour.openclassprog.model.Ticket;
 import com.adour.openclassprog.repository.TicketRepository;
+import com.adour.openclassprog.repository.UserRepository;
 import com.adour.openclassprog.service.TicketService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Objects;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,10 +29,12 @@ import java.time.format.DateTimeFormatter;
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
     private final TicketMap ticketMap;
+    private final UserRepository userRepository;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, TicketMap ticketMap) {
+    public TicketServiceImpl(TicketRepository ticketRepository, TicketMap ticketMap, UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
         this.ticketMap = ticketMap;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -54,7 +61,17 @@ public class TicketServiceImpl implements TicketService {
         ticket.setCreatedAt(LocalDateTime.now());
         ticket.setUpdatedAt(LocalDateTime.now());
 
-        // 5. Save and return
+        // Ambil user login untuk dibuatOleh
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String loggedInUser;
+        if (principal instanceof UserDetails) {
+            loggedInUser = ((UserDetails) principal).getUsername(); // Mengambil username/email login
+        } else {
+            loggedInUser = principal.toString();
+        }
+        ticket.setDibuatOleh(loggedInUser);
+
+        // Save and return
         Ticket savedTicket = ticketRepository.save(ticket);
         return ticketMap.toDTO(savedTicket);
     }
