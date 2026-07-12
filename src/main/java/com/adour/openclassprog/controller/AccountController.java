@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/v1/acc")
+@RequestMapping("/api/v1/accounts")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API contains a secure ... method")
 public class AccountController {
