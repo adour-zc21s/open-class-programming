@@ -50,7 +50,7 @@ public class EmailService {
             message.setText("Hello,\n\nThe following ticket has been successfully closed and resolved.\n\n" +
                     "Ticket Number : " + ticketNo + "\n" +
                     "Title         : " + title + "\n\n" +
-                    "No further action is required from your end." + "\n\n" +
+                    "We appreciate your patience during this process." + "\n\n" +
                     "Thank you." + "\n\n" +
                     "IT Support");
 
