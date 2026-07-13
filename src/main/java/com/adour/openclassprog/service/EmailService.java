@@ -27,8 +27,8 @@ public class EmailService {
             message.setText("Hello,\n\nA new ticket has been created for you.\n\n" +
                     "Ticket Number : " + ticketNo + "\n" +
                     "Title         : " + title + "\n\n" +
-                    "We will approve your ticket shortly. We appreciate your patience during this process." + "\n\n" +
-                    "Please do not hesitate to contact us if you have any questions." +
+                    "We will approve your ticket shortly. We appreciate your patience during this process." + "\n" +
+                    "Please do not hesitate to contact us if you have any questions." + "\n\n" +
                     "Thank you." + "\n\n" +
                     "IT Support");
 
