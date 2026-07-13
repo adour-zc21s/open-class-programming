@@ -1,10 +1,11 @@
 package com.adour.openclassprog.controller;
 
+import com.adour.openclassprog.dto.AccountDTO;
 import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.TicketCommentDTO;
 import com.adour.openclassprog.dto.TicketDTO;
 import com.adour.openclassprog.enums.Departments;
-import com.adour.openclassprog.model.Branch;
+import com.adour.openclassprog.service.AccountService;
 import com.adour.openclassprog.service.BranchService;
 import com.adour.openclassprog.service.TicketCommentService;
 import com.adour.openclassprog.service.TicketService;
@@ -32,11 +33,13 @@ public class TicketController {
     private final TicketService ticketService;
     private final TicketCommentService ticketCommentService;
     private final BranchService branchService;
+    private final AccountService accountService;
 
-    public TicketController(TicketService ticketService, TicketCommentService ticketCommentService, BranchService branchService) {
+    public TicketController(TicketService ticketService, TicketCommentService ticketCommentService, BranchService branchService, AccountService accountService) {
         this.ticketService = ticketService;
         this.ticketCommentService = ticketCommentService;
         this.branchService = branchService;
+        this.accountService = accountService;
     }
     @GetMapping
     public ResponseEntity<List<TicketDTO>> getAllTicket(){
@@ -81,5 +84,9 @@ public class TicketController {
     @GetMapping("/branches")
     public ResponseEntity<List<BranchDTO>> getAllBranches() {
         return ResponseEntity.ok(branchService.getAllBranches());
+    }
+    @GetMapping("/accounts")
+    public ResponseEntity<List<AccountDTO>> getAllAccounts() {
+        return ResponseEntity.ok(accountService.getAllAccount());
     }
 }
