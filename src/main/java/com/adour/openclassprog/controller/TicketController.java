@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -88,5 +89,10 @@ public class TicketController {
     @GetMapping("/accounts")
     public ResponseEntity<List<AccountDTO>> getAllAccounts() {
         return ResponseEntity.ok(accountService.getAllAccount());
+    }
+    @PutMapping("/{id}/close")
+    public ResponseEntity<TicketDTO> closeTicket(@PathVariable Long id) {
+        TicketDTO closedTicket = ticketService.closeTicket(id);
+        return ResponseEntity.ok(closedTicket);
     }
 }

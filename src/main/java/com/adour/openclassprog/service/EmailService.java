@@ -36,4 +36,26 @@ public class EmailService {
             System.err.println("Failed to send email: " + e.getMessage());
         }
     }
+    @Async
+    public void sendCloseTicketNotification(String recipientEmail, String ticketNo, String title) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("openclass.prg@gmail.com");
+            message.setTo(recipientEmail);
+
+            // Set the strict closed subject line
+            message.setSubject("Ticket Closed: " + title);
+
+            // Custom body message for resolution
+            message.setText("Hello,\n\nThe following ticket has been successfully closed and resolved.\n\n" +
+                    "Ticket Number: " + ticketNo + "\n" +
+                    "Title: " + title + "\n\n" +
+                    "No further action is required from your end. Thank you.");
+
+            mailSender.send(message);
+            System.out.println("Resolution email sent successfully to " + recipientEmail);
+        } catch (Exception e) {
+            System.err.println("Failed to send close ticket email: " + e.getMessage());
+        }
+    }
 }

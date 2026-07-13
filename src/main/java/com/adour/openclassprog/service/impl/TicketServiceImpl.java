@@ -111,4 +111,24 @@ public class TicketServiceImpl implements TicketService {
         }
         ticketRepository.deleteById(id);
     }
+
+    @Override
+    public TicketDTO closeTicket(Long id) {
+        // Find the ticket
+        Ticket ticket = ticketRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Ticket not found with id: " + id));
+
+        // Update status to Closed
+        ticket.setStatus("Closed");
+        Ticket savedTicket = ticketRepository.save(ticket);
+        // Call the specialized close email method
+        if (savedTicket.getEmailNotification() != null && !savedTicket.getEmailNotification().isEmpty()) {
+            emailService.sendCloseTicketNotification(
+                    savedTicket.getEmailNotification(),
+                    savedTicket.getNoTiket(),
+                    savedTicket.getJudul() // Pass the raw title; the method adds "Ticket Closed:" prefix
+            );
+        }
+        return ticketMap.toDTO(savedTicket);
+    }
 }
