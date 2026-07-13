@@ -25,10 +25,12 @@ public class EmailService {
             message.setTo(recipientEmail);
             message.setSubject("New Ticket Created: " + ticketNo);
             message.setText("Hello,\n\nA new ticket has been created for you.\n\n" +
-                    "Ticket Number: " + ticketNo + "\n" +
-                    "Title: " + title + "\n\n" +
+                    "Ticket Number : " + ticketNo + "\n" +
+                    "Title         : " + title + "\n\n" +
                     "We will approve your ticket shortly. We appreciate your patience during this process." + "\n\n" +
-                    "Thank you, please do not hesitate to contact us if you have any questions.");
+                    "Please do not hesitate to contact us if you have any questions." +
+                    "Thank you." + "\n\n" +
+                    "IT Support");
 
             mailSender.send(message);
             System.out.println("Email sent successfully to " + recipientEmail);
@@ -42,15 +44,15 @@ public class EmailService {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("openclass.prg@gmail.com");
             message.setTo(recipientEmail);
-
             // Set the strict closed subject line
             message.setSubject("Ticket Closed: " + title);
-
             // Custom body message for resolution
             message.setText("Hello,\n\nThe following ticket has been successfully closed and resolved.\n\n" +
-                    "Ticket Number: " + ticketNo + "\n" +
-                    "Title: " + title + "\n\n" +
-                    "No further action is required from your end. Thank you.");
+                    "Ticket Number : " + ticketNo + "\n" +
+                    "Title         : " + title + "\n\n" +
+                    "No further action is required from your end." + "\n\n" +
+                    "Thank you." + "\n\n" +
+                    "IT Support");
 
             mailSender.send(message);
             System.out.println("Resolution email sent successfully to " + recipientEmail);
