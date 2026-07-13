@@ -1,8 +1,12 @@
 package com.adour.openclassprog.service.impl;
 
+import com.adour.openclassprog.config.map.BranchMap;
 import com.adour.openclassprog.config.map.TicketMap;
+import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.TicketDTO;
+import com.adour.openclassprog.model.Branch;
 import com.adour.openclassprog.model.Ticket;
+import com.adour.openclassprog.repository.BranchRepository;
 import com.adour.openclassprog.repository.TicketRepository;
 import com.adour.openclassprog.repository.UserRepository;
 import com.adour.openclassprog.service.TicketService;
@@ -11,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import java.util.Objects;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,12 +32,10 @@ import java.time.format.DateTimeFormatter;
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
     private final TicketMap ticketMap;
-    private final UserRepository userRepository;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, TicketMap ticketMap, UserRepository userRepository) {
+    public TicketServiceImpl(TicketRepository ticketRepository, TicketMap ticketMap) {
         this.ticketRepository = ticketRepository;
         this.ticketMap = ticketMap;
-        this.userRepository = userRepository;
     }
 
     @Override

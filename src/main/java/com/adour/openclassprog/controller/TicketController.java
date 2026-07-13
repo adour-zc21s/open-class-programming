@@ -1,8 +1,11 @@
 package com.adour.openclassprog.controller;
 
+import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.TicketCommentDTO;
 import com.adour.openclassprog.dto.TicketDTO;
 import com.adour.openclassprog.enums.Departments;
+import com.adour.openclassprog.model.Branch;
+import com.adour.openclassprog.service.BranchService;
 import com.adour.openclassprog.service.TicketCommentService;
 import com.adour.openclassprog.service.TicketService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,10 +31,12 @@ import java.util.List;
 public class TicketController {
     private final TicketService ticketService;
     private final TicketCommentService ticketCommentService;
+    private final BranchService branchService;
 
-    public TicketController(TicketService ticketService, TicketCommentService ticketCommentService) {
+    public TicketController(TicketService ticketService, TicketCommentService ticketCommentService, BranchService branchService) {
         this.ticketService = ticketService;
         this.ticketCommentService = ticketCommentService;
+        this.branchService = branchService;
     }
     @GetMapping
     public ResponseEntity<List<TicketDTO>> getAllTicket(){
@@ -54,7 +59,7 @@ public class TicketController {
         ticketService.deleteTicket(id);
         return ResponseEntity.noContent().build();
     }
-//    POST /api/tickets/{ticketId}/comments
+    // /api/tickets/{ticketId}/comments
     @PostMapping("/{ticketId}/comments")
     public ResponseEntity<TicketCommentDTO> createComment(
             @PathVariable Long ticketId,
@@ -67,8 +72,14 @@ public class TicketController {
         List<TicketCommentDTO> comments = ticketCommentService.getCommentsByTicketId(ticketId);
         return ResponseEntity.ok(comments);
     }
+    // /api/tickets/{ticketId}/departments
     @GetMapping("/departments")
     public List<Departments> getDepartments(){
         return Arrays.asList(Departments.values());
+    }
+    // /api/tickets/{ticketId}/branches
+    @GetMapping("/branches")
+    public ResponseEntity<List<BranchDTO>> getAllBranches() {
+        return ResponseEntity.ok(branchService.getAllBranches());
     }
 }
