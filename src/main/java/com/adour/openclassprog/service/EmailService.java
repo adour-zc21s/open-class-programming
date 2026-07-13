@@ -27,7 +27,8 @@ public class EmailService {
             message.setText("Hello,\n\nA new ticket has been created for you.\n\n" +
                     "Ticket Number: " + ticketNo + "\n" +
                     "Title: " + title + "\n\n" +
-                    "Please check your dashboard to process it.");
+                    "We will approve your ticket shortly. We appreciate your patience during this process." + "\n\n" +
+                    "Thank you, please do not hesitate to contact us if you have any questions.");
 
             mailSender.send(message);
             System.out.println("Email sent successfully to " + recipientEmail);
