@@ -1,0 +1,38 @@
+package com.adour.openclassprog.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
+/*
+ * @author {Open Class Programming}
+ * Abdur Rahman Wahid - X-Sari
+ * +62 813 8522 9903
+ * Created 13/07/2026 - 16:00
+ */
+@Service
+public class EmailService {
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Async // Runs in the background so the user doesn't wait for the email to send
+    public void sendTicketNotification(String recipientEmail, String ticketNo, String title) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("jarisibertech@gmail.com");
+            message.setTo(recipientEmail);
+            message.setSubject("New Ticket Created: " + ticketNo);
+            message.setText("Hello,\n\nA new ticket has been created for you.\n\n" +
+                    "Ticket Number: " + ticketNo + "\n" +
+                    "Title: " + title + "\n\n" +
+                    "Please check your dashboard to process it.");
+
+            mailSender.send(message);
+            System.out.println("Email sent successfully to " + recipientEmail);
+        } catch (Exception e) {
+            System.err.println("Failed to send email: " + e.getMessage());
+        }
+    }
+}

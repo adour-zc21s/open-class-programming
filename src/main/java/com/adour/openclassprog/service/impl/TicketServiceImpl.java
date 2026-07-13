@@ -1,14 +1,10 @@
 package com.adour.openclassprog.service.impl;
 
-import com.adour.openclassprog.config.map.BranchMap;
 import com.adour.openclassprog.config.map.TicketMap;
-import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.TicketDTO;
-import com.adour.openclassprog.model.Branch;
 import com.adour.openclassprog.model.Ticket;
-import com.adour.openclassprog.repository.BranchRepository;
 import com.adour.openclassprog.repository.TicketRepository;
-import com.adour.openclassprog.repository.UserRepository;
+import com.adour.openclassprog.service.EmailService;
 import com.adour.openclassprog.service.TicketService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,10 +28,12 @@ import java.time.format.DateTimeFormatter;
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
     private final TicketMap ticketMap;
+    private final EmailService emailService;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, TicketMap ticketMap) {
+    public TicketServiceImpl(TicketRepository ticketRepository, TicketMap ticketMap, EmailService emailService) {
         this.ticketRepository = ticketRepository;
         this.ticketMap = ticketMap;
+        this.emailService = emailService;
     }
 
     @Override
@@ -53,10 +51,10 @@ public class TicketServiceImpl implements TicketService {
             nextSequence = Integer.parseInt(sequenceStr) + 1;
         }
 
-        // 3. Format the new ticket number with a 3-digit zero padding (e.g., "TKT-20260710-001")
+        // Format the new ticket number with a 3-digit zero padding (e.g., "TKT-20260710-001")
         String generatedTicketNo = datePrefix + String.format("%03d", nextSequence);
 
-        // 4. Map DTO to Entity and assign the generated ticket number
+        // Map DTO to Entity and assign the generated ticket number
         Ticket ticket = ticketMap.toEntity(ticketDTO);
         ticket.setNoTiket(generatedTicketNo);
         ticket.setCreatedAt(LocalDateTime.now());
@@ -74,6 +72,14 @@ public class TicketServiceImpl implements TicketService {
 
         // Save and return
         Ticket savedTicket = ticketRepository.save(ticket);
+        // Automatically trigger the email notification
+        if (savedTicket.getEmailNotification() != null && !savedTicket.getEmailNotification().isEmpty()) {
+            emailService.sendTicketNotification(
+                    savedTicket.getEmailNotification(),
+                    savedTicket.getNoTiket(),
+                    savedTicket.getJudul()
+            );
+        }
         return ticketMap.toDTO(savedTicket);
     }
 
