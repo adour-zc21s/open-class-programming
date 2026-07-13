@@ -14,7 +14,10 @@ import java.util.List;
 public interface TicketService {
     TicketDTO createTicket(TicketDTO ticketDTO);
     TicketDTO getTicketById(Long id);
-    List<TicketDTO> getAllTickets();
+
+    List<TicketDTO> getAllOpenTickets();
+
+    //    List<TicketDTO> getAllTickets();
     TicketDTO updateTicket(Long id, TicketDTO ticketDTO);
     void deleteTicket(Long id);
     TicketDTO closeTicket(Long id);

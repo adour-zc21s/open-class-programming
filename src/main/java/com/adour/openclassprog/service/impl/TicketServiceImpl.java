@@ -91,9 +91,10 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<TicketDTO> getAllTickets() {
-        List<Ticket> tiket = ticketRepository.findAll();
-        return ticketMap.toDTOList(tiket);
+    public List<TicketDTO> getAllOpenTickets() {
+        List<String> activeStatuses = List.of("Open", "In Progress");
+        List<Ticket> activeTickets = ticketRepository.findByStatusIn(activeStatuses);
+        return ticketMap.toDTOList(activeTickets);
     }
 
     @Override

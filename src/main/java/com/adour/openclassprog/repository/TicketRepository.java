@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /*
@@ -18,4 +19,5 @@ import java.util.Optional;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query("SELECT t.noTiket FROM Ticket t WHERE t.noTiket LIKE CONCAT(:prefix, '%') ORDER BY t.noTiket DESC LIMIT 1")
     Optional<String> findLatestTicketNoByPrefix(@Param("prefix") String prefix);
+    List<Ticket> findByStatusIn(List<String> statuses);
 }

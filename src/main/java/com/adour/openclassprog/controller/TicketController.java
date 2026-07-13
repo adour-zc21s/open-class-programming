@@ -44,7 +44,7 @@ public class TicketController {
     }
     @GetMapping
     public ResponseEntity<List<TicketDTO>> getAllTicket(){
-        return ResponseEntity.ok(ticketService.getAllTickets());
+        return ResponseEntity.ok(ticketService.getAllOpenTickets());
     }
     @PostMapping
     public ResponseEntity<TicketDTO> addTicket(@RequestBody TicketDTO ticketDTO) {
