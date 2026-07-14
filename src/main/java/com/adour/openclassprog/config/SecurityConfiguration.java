@@ -78,6 +78,7 @@ public class SecurityConfiguration {
         config.addAllowedOrigin("http://192.168.1.2:3000");
         config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedOrigin("http://10.101.56.232:3000");
+        config.addAllowedOrigin("http://http://202.51.103.154/:3000");
         config.addAllowedOrigin("http://localhost:4200");
 
         config.setAllowedHeaders(Arrays.asList(
