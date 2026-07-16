@@ -32,8 +32,8 @@ public class DeviceController {
     @PostMapping
     @PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<DeviceDTO> addDevice(@RequestBody DeviceDTO deviceDTO) {
-        DeviceDTO created = deviceService.createDevice(deviceDTO);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+        DeviceDTO addDevice = deviceService.createDevice(deviceDTO);
+        return new ResponseEntity<>(addDevice, HttpStatus.CREATED);
     }
     @GetMapping
     public ResponseEntity<List<DeviceDTO>> getAllDevices() {

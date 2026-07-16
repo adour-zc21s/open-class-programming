@@ -58,7 +58,6 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public List<DeviceDTO> searchDeviceByDeviceName(String deviceName) {
         List<Device> devices = deviceRepository.findByDeviceNameContainingIgnoreCase(deviceName);
-        // 1. Check if the repository returned an empty list right here in the service
         if (devices.isEmpty()) {
             throw new NoSuchElementException("No device record found with name: " + deviceName);
         }

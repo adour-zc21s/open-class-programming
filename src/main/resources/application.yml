@@ -1,4 +1,11 @@
 spring:
+  management:
+    endpoint:
+      health:
+        show-details=always:
+      web:
+        exposure:
+          include=health,info,metrics:
   datasource:
       url: jdbc:mysql://localhost:3306/OCP_DEV?useSSL=false&serverTimezone=UTC&characterEncoding=UTF-8
       username: root

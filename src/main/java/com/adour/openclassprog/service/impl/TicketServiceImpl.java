@@ -4,7 +4,7 @@ import com.adour.openclassprog.config.map.TicketMap;
 import com.adour.openclassprog.dto.TicketDTO;
 import com.adour.openclassprog.model.Ticket;
 import com.adour.openclassprog.repository.TicketRepository;
-import com.adour.openclassprog.service.EmailService;
+import com.adour.openclassprog.config.EmailServiceConfig;
 import com.adour.openclassprog.service.TicketService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,12 +28,12 @@ import java.time.format.DateTimeFormatter;
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
     private final TicketMap ticketMap;
-    private final EmailService emailService;
+    private final EmailServiceConfig emailServiceConfig;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, TicketMap ticketMap, EmailService emailService) {
+    public TicketServiceImpl(TicketRepository ticketRepository, TicketMap ticketMap, EmailServiceConfig emailServiceConfig) {
         this.ticketRepository = ticketRepository;
         this.ticketMap = ticketMap;
-        this.emailService = emailService;
+        this.emailServiceConfig = emailServiceConfig;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class TicketServiceImpl implements TicketService {
         Ticket savedTicket = ticketRepository.save(ticket);
         // Automatically trigger the email notification
         if (savedTicket.getEmailNotification() != null && !savedTicket.getEmailNotification().isEmpty()) {
-            emailService.sendTicketNotification(
+            emailServiceConfig.sendTicketNotification(
                     savedTicket.getEmailNotification(),
                     savedTicket.getNoTiket(),
                     savedTicket.getJudul()
@@ -124,7 +124,7 @@ public class TicketServiceImpl implements TicketService {
         Ticket savedTicket = ticketRepository.save(ticket);
         // Call the specialized close email method
         if (savedTicket.getEmailNotification() != null && !savedTicket.getEmailNotification().isEmpty()) {
-            emailService.sendCloseTicketNotification(
+            emailServiceConfig.sendCloseTicketNotification(
                     savedTicket.getEmailNotification(),
                     savedTicket.getNoTiket(),
                     savedTicket.getJudul() // Pass the raw title; the method adds "Ticket Closed:" prefix
