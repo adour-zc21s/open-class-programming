@@ -10,6 +10,7 @@ import jakarta.persistence.Column;
  */
 public record EmailDTO(
     Long id,
+    String perfectName,
     String email,
     String passwd
 ) {

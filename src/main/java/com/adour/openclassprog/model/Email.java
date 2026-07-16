@@ -22,9 +22,9 @@ public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 100)
+    @Column(name = "perfect_name", length = 100)
     private String perfectName;
     private String email;
-    @Column(name = "passw")
+    @Column(name = "passwd")
     private String passwd;
 }

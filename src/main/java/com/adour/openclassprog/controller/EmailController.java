@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/v1/email")
+@RequestMapping("/api/v1/emails")
 @PreAuthorize("hasAnyRole('ADMIN','USER')")
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
 public class EmailController {
