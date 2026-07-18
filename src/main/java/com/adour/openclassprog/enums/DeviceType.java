@@ -9,19 +9,18 @@ import lombok.Data;
  * Created 23/06/2026 - 18:34
  */
 public enum DeviceType {
+    AP("Access Point"),
     Desktop("PC/All in one"),
     Laptop("Laptop"),
+    Mikrotik("Mikrotik"),
     Printer("Printer"),
-    Server("Server"),
-    Switch("Switch"),
     Router("Router"),
-    Mikrotik("Mikrotik");
+    Server("Server"),
+    Switch("Switch");
     private final String displayType;
-
     DeviceType(String displayType) {
         this.displayType = displayType;
     }
-
     public String getDisplayType() {
         return displayType;
     }

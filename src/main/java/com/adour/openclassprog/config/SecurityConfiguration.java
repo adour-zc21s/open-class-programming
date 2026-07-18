@@ -44,7 +44,6 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(
                                 "/api/v1/auth/**",
-                                "/api/v1/**",
                                 "/api/v1/dev/search",
                                 "/api/v1/branches/search",
                                 "/api/v1/tickets",
@@ -53,6 +52,8 @@ public class SecurityConfiguration {
                                 "/v2/api-docs",
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
+                                "/actuator/prometheus",
+                                "/error",
                                 "/swagger-resources",
                                 "/swagger-resources/**",
                                 "/configuration/ui",
@@ -76,7 +77,8 @@ public class SecurityConfiguration {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://192.168.1.2:3000");
+        config.addAllowedOrigin("http://192.168.1.5:3000");
+        config.addAllowedOrigin("http://192.168.1.5:4200");
         config.addAllowedOrigin("http://localhost:3000");
         config.addAllowedOrigin("http://10.101.56.232:3000");
         config.addAllowedOrigin("http://202.51.103.154:3000");
