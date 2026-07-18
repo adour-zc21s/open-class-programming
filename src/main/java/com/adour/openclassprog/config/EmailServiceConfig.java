@@ -36,7 +36,7 @@ public class EmailServiceConfig {
                     "</head>" +
                     "<body>" +
                     "  <div style=\"font-family: 'Quicksand', sans-serif; line-height: 1.6; color: #333333; max-width: 500px; margin: 20px auto; border: 1px solid #e0e0e0; padding: 20px; border-radius: 5px;\">" +
-                    "    <h2 style=\"color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 3px; margin: 2px 0 15px 0;\">Ticket Resolved</h2>" +
+                    "    <h2 style=\"color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 3px; margin: 2px 0 15px 0;\">Ticket Created</h2>" +
                     "    <p>Hello,</p>" +
                     "    <p>New ticket has been created for you.</p>" +
                     "    " +
