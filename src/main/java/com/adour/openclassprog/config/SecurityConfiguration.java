@@ -53,7 +53,6 @@ public class SecurityConfiguration {
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
                                 "/actuator/prometheus",
-                                "/error",
                                 "/swagger-resources",
                                 "/swagger-resources/**",
                                 "/configuration/ui",
