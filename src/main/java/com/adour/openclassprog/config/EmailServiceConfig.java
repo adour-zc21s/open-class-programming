@@ -35,8 +35,8 @@ public class EmailServiceConfig {
                     "  <link href=\"https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap\" rel=\"stylesheet\">" +
                     "</head>" +
                     "<body>" +
-                    "  <div style=\"font-family: 'Quicksand', sans-serif; line-height: 1.6; color: #333333; max-width: 500px; margin: 20px auto; border: 1px solid #e0e0e0; padding: 20px; border-radius: 5px;\">" +
-                    "    <h2 style=\"color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 3px; margin: 2px 0 15px 0;\">Ticket Created</h2>" +
+                    "  <div style=\"font-family: 'Quicksand', sans-serif; line-height: 1.6; color: #333333; max-width: 500px; margin: 9px auto; border: 1px solid #e0e0e0; padding-left: 40px; padding-right: 40px; padding-top: 20px; border-radius: 5px;\">" +
+                    "    <h2 style=\"color: #32CD32; border-bottom: 2px solid #e0e0e0; padding-bottom: 3px; margin: 2px 0 5px 0;\">Ticket Created</h2>" +
                     "    <p>Hello,</p>" +
                     "    <p>New ticket has been created for you.</p>" +
                     "    " +
@@ -54,7 +54,7 @@ public class EmailServiceConfig {
                     "      <tr>" +
                     "        <td style=\"padding: 1px; font-weight: bold;\">Status</td>" +
                     "        <td style=\"padding: 1px; font-weight: bold; width: 2%;\">:</td>" +
-                    "        <td style=\"padding: 1px;\"><span style=\"background-color: #2ecc71; color: white; padding: 3px 8px; border-radius: 3px; font-size: 12px; font-weight: bold;\">CLOSED</span></td>" +
+                    "        <td style=\"padding: 1px;\"><span style=\"background-color: #008000; color: white; padding: 3px 8px; border-radius: 3px; font-size: 12px; font-weight: bold;\">OPEN</span></td>" +
                     "      </tr>" +
                     "    </table>" +
                     "    " +
@@ -63,8 +63,8 @@ public class EmailServiceConfig {
                     "    <p style=\"font-size: 12px; color: #7f8c8d;\">Best regards,<br>" +
                     "    <strong>IT Support Helpdesk</strong><br>" +
                     "    OpenClass Hub</p>" +
-                    "    <hr style=\"border: 0; border-top: 1px solid #e0e0e0; margin: 10px 0;\">" +
-                    "    <p style=\"font-size: 11px; color: #7f8c8d; text-align: center;\">This email is generated automatically. Please do not send a response to this email.</p>" +
+                    "    <hr style=\"border: 0; border-top: 1px solid #e0e0e0; margin: 5px 0;\">" +
+                    "    <p style=\"font-size: 12px; color: #7f8c8d; text-align: center;\">This email is generated automatically. Please do not send a response to this email.</p>" +
                     "  </div>" +
                     "</body>" +
                     "</html>";
@@ -94,8 +94,8 @@ public class EmailServiceConfig {
                     "  <link href=\"https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap\" rel=\"stylesheet\">" +
                     "</head>" +
                     "<body>" +
-                    "  <div style=\"font-family: 'Quicksand', sans-serif; line-height: 1.6; color: #333333; max-width: 500px; margin: 20px auto; border: 1px solid #e0e0e0; padding: 20px; border-radius: 5px;\">" +
-                    "    <h2 style=\"color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 3px; margin: 2px 0 15px 0;\">Ticket Resolved</h2>" +
+                    "  <div style=\"font-family: 'Quicksand', sans-serif; line-height: 1.6; color: #333333; max-width: 500px; margin: 9px auto; border: 1px solid #e0e0e0; padding-left: 40px; padding-right: 40px; padding-top: 20px; border-radius: 5px;\">" +
+                    "    <h2 style=\"color: #32CD32; border-bottom: 2px solid #e0e0e0; padding-bottom: 3px; margin: 2px 0 5px 0;\">Ticket Resolved</h2>" +
                     "    <p>Hello,</p>" +
                     "    <p>We are writing to inform you that your IT support request has been successfully resolved and closed.</p>" +
                     "    " +
@@ -113,7 +113,7 @@ public class EmailServiceConfig {
                     "      <tr>" +
                     "        <td style=\"padding: 1px; font-weight: bold;\">Status</td>" +
                     "        <td style=\"padding: 1px; font-weight: bold; width: 2%;\">:</td>" +
-                    "        <td style=\"padding: 1px;\"><span style=\"background-color: #2ecc71; color: white; padding: 3px 8px; border-radius: 3px; font-size: 12px; font-weight: bold;\">CLOSED</span></td>" +
+                    "        <td style=\"padding: 1px;\"><span style=\"background-color: #DC143C; color: white; padding: 3px 8px; border-radius: 3px; font-size: 12px; font-weight: bold;\">CLOSED</span></td>" +
                     "      </tr>" +
                     "    </table>" +
                     "    " +
@@ -121,8 +121,8 @@ public class EmailServiceConfig {
                     "    <p style=\"font-size: 12px; color: #7f8c8d;\">Best regards,<br>" +
                     "    <strong>IT Support Helpdesk</strong><br>" +
                     "    OpenClass Hub</p>" +
-                    "    <hr style=\"border: 0; border-top: 1px solid #e0e0e0; margin: 10px 0;\">" +
-                    "    <p style=\"font-size: 11px; color: #7f8c8d; text-align: center;\">This email is generated automatically. Please do not send a response to this email.</p>" +
+                    "    <hr style=\"border: 0; border-top: 1px solid #e0e0e0; margin: 5px 0;\">" +
+                    "    <p style=\"font-size: 12px; color: #7f8c8d; text-align: center;\">This email is generated automatically. Please do not send a response to this email.</p>" +
                     "  </div>" +
                     "</body>" +
                     "</html>";
