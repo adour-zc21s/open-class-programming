@@ -13,4 +13,6 @@ import com.adour.openclassprog.payload.res.AuthenticationResponse;
 public interface AuthenticationService {
     AuthenticationResponse register(RegisterRequest request);
     AuthenticationResponse authenticate(AuthenticationRequest request);
+    // Add this line
+    void updateProfileImage(Long userId, String fileName);
 }

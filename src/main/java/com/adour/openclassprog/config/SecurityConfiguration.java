@@ -62,6 +62,7 @@ public class SecurityConfiguration {
                                 "/swagger-ui.html"
                         ).permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/resource").hasRole("ADMIN")
+                        .requestMatchers("/uploads/profile-pictures/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

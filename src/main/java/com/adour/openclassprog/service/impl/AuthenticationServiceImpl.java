@@ -31,6 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final RefreshTokenService refreshTokenService;
+    private final LocalStorageService localStorageService;
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
@@ -78,6 +79,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .id(user.getId())
                 .refreshToken(refreshToken.getToken())
                 .tokenType( TokenType.BEARER.name())
+                .profileImageUrl(user.getProfileImageUrl())
                 .build();
+    }
+    @Override
+    @Transactional
+    public void updateProfileImage(Long userId, String newFileName) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+
+        // Delete the previous profile image if it exists to avoid orphaned files
+        if (user.getProfileImageUrl() != null) {
+            localStorageService.deleteFile(user.getProfileImageUrl());
+        }
+
+        user.setProfileImageUrl(newFileName);
+        userRepository.save(user);
     }
 }

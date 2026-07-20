@@ -8,6 +8,7 @@ import com.adour.openclassprog.payload.res.RefreshTokenResponse;
 import com.adour.openclassprog.service.AuthenticationService;
 import com.adour.openclassprog.service.JwtService;
 import com.adour.openclassprog.service.RefreshTokenService;
+import com.adour.openclassprog.service.impl.LocalStorageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,14 +18,16 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 /*
  * @author {Open Class Programming}
@@ -47,6 +50,8 @@ public class AuthenticationController {
     private final RefreshTokenService refreshTokenService;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    @Autowired
+    private LocalStorageService localStorageService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request) {
@@ -116,5 +121,36 @@ public class AuthenticationController {
                 .header(HttpHeaders.SET_COOKIE,refreshTokenCookie.toString())
                 .build();
 
+    }
+    @PostMapping(value = "/{id}/profile-image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> uploadProfileImage(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file) {
+
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Please select a file to upload."));
+        }
+
+        String contentType = file.getContentType();
+        if (contentType == null || !contentType.startsWith("image/")) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Only image files are allowed."));
+        }
+
+        try {
+            // 1. Save locally via your Storage Service
+            String fileName = localStorageService.saveFile(file);
+
+            // 2. Link filename to the user profile via your service layer
+            authenticationService.updateProfileImage(id, fileName);
+
+            return ResponseEntity.ok(Map.of(
+                    "message", "Profile image updated successfully",
+                    "imageUrl", "/uploads/profile-pictures/" + fileName
+            ));
+        } catch (Exception e) {
+            e.printStackTrace(); // <-- This will print the real error to your IDE console log
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Failed to upload image: " + e.getMessage()));
+        }
     }
 }

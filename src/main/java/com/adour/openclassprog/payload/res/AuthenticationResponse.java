@@ -29,4 +29,6 @@ public class AuthenticationResponse {
     private String refreshToken;
     @JsonProperty("token_type")
     private String tokenType;
+    @JsonProperty("profile_image_url")
+    private String profileImageUrl;
 }
