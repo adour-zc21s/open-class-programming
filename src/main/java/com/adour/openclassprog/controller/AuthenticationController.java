@@ -153,4 +153,5 @@ public class AuthenticationController {
                     .body(Map.of("error", "Failed to upload image: " + e.getMessage()));
         }
     }
+    
 }
