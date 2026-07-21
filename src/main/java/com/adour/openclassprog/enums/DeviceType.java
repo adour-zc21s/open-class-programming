@@ -1,7 +1,5 @@
 package com.adour.openclassprog.enums;
 
-import lombok.Data;
-
 /*
  * @author {Open Class Programming}
  * Abdur Rahman Wahid - X-Sari
@@ -13,10 +11,12 @@ public enum DeviceType {
     Desktop("PC/All in one"),
     Laptop("Laptop"),
     Mikrotik("Mikrotik"),
+    Peripherals("Peripheral"),
     Printer("Printer"),
     Router("Router"),
     Server("Server"),
-    Switch("Switch");
+    Switch("Switch"),
+    Telephone("Telephone");
     private final String displayType;
     DeviceType(String displayType) {
         this.displayType = displayType;
