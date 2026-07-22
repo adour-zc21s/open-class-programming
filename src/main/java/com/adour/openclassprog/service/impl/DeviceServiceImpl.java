@@ -45,7 +45,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public List<DeviceDTO> getAllDevices() {
-        List<Device> devices = deviceRepository.findAll();
+        List<Device> devices = deviceRepository.findAllByOrderByIdDesc();
         return deviceMap.toDTOList(devices);
     }
 

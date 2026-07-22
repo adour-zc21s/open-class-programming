@@ -16,4 +16,5 @@ import java.util.List;
 public interface DeviceRepository extends JpaRepository<Device, Long> {
     // Automatically generates: SELECT * FROM device WHERE LOWER(device_name) LIKE LOWER('%?%')
     List<Device> findByDeviceNameContainingIgnoreCase(String deviceName);
+    List<Device> findAllByOrderByIdDesc();
 }
