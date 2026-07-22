@@ -9,6 +9,7 @@ package com.adour.openclassprog.enums;
 public enum DeviceType {
     AP("Access Point"),
     Desktop("PC/All in one"),
+    Gadget("Gadget"),
     Laptop("Laptop"),
     Mikrotik("Mikrotik"),
     Peripherals("Peripheral"),
@@ -16,7 +17,6 @@ public enum DeviceType {
     Router("Router"),
     Server("Server"),
     Switch("Switch"),
-    Gadget("Gadget"),
     Telephone("Telephone");
     private final String displayType;
     DeviceType(String displayType) {
