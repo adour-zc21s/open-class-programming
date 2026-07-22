@@ -16,6 +16,7 @@ public enum DeviceType {
     Router("Router"),
     Server("Server"),
     Switch("Switch"),
+    Gadget("Gadget"),
     Telephone("Telephone");
     private final String displayType;
     DeviceType(String displayType) {
