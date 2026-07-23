@@ -52,7 +52,7 @@ public class TicketCommentServiceImpl implements TicketCommentService {
             throw new RuntimeException("Ticket comment not found with id: " + ticketId);
         }
         // Fetch all comments matching the ticketId
-        List<TicketComment> comments = ticketCommentsRepository.findAllByOrderByIdAsc();
+        List<TicketComment> comments = ticketCommentsRepository.findByTicketId(ticketId);
         // Map the collection of entities to a clean list of DTOs
         return ticketCommentsMap.toDTOList(comments);
     }

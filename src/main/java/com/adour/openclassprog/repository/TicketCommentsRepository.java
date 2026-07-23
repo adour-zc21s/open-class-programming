@@ -1,6 +1,5 @@
 package com.adour.openclassprog.repository;
 
-import com.adour.openclassprog.model.Device;
 import com.adour.openclassprog.model.TicketComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,5 +15,4 @@ import java.util.List;
 @Repository
 public interface TicketCommentsRepository extends JpaRepository<TicketComment, Long> {
     List<TicketComment> findByTicketId(Long ticketId);
-    List<TicketComment> findAllByOrderByIdAsc();
 }
