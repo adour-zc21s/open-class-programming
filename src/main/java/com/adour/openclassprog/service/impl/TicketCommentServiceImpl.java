@@ -47,13 +47,13 @@ public class TicketCommentServiceImpl implements TicketCommentService {
     @Override
     @Transactional(readOnly = true)
     public List<TicketCommentDTO> getCommentsByTicketId(Long ticketId) {
-        // 1. Verify the ticket actually exists first
+        // Verify the ticket actually exists first
         if (!ticketRepository.existsById(ticketId)) {
-            throw new RuntimeException("Ticket not found with id: " + ticketId);
+            throw new RuntimeException("Ticket comment not found with id: " + ticketId);
         }
-        // 2. Fetch all comments matching the ticketId
-        List<TicketComment> comments = ticketCommentsRepository.findByTicketId(ticketId);
-        // 3. Map the collection of entities to a clean list of DTOs
+        // Fetch all comments matching the ticketId
+        List<TicketComment> comments = ticketCommentsRepository.findAllByOrderByIdAsc();
+        // Map the collection of entities to a clean list of DTOs
         return ticketCommentsMap.toDTOList(comments);
     }
 }
