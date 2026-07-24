@@ -1,7 +1,9 @@
 package com.adour.openclassprog.controller;
 
+import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.DeviceDTO;
 import com.adour.openclassprog.enums.DeviceType;
+import com.adour.openclassprog.service.BranchService;
 import com.adour.openclassprog.service.DeviceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -25,9 +27,11 @@ import java.util.List;
 @Tag(name = "Authorization", description = "The Authorization API. Contains a secure hello method")
 public class DeviceController {
     private final DeviceService deviceService;
+    private final BranchService branchService;
 
-    public DeviceController(DeviceService deviceService) {
+    public DeviceController(DeviceService deviceService, BranchService branchService) {
         this.deviceService = deviceService;
+        this.branchService = branchService;
     }
     @PostMapping
     @PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('ADMIN')")
@@ -80,5 +84,10 @@ public class DeviceController {
     @GetMapping("/types")
     public List<DeviceType> getDeviceTypes() {
         return Arrays.asList(DeviceType.values());
+    }
+
+    @GetMapping("/branches")
+    public ResponseEntity<List<BranchDTO>> getAllBranches() {
+        return ResponseEntity.ok(branchService.getBranchesAscending());
     }
 }
