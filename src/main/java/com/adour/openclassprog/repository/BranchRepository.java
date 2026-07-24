@@ -19,5 +19,6 @@ import java.util.Optional;
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
     List<BranchDTO> findByNameContainingIgnoreCase(String name);
+    List<Branch> findAllByOrderByIdDesc();
 //    Page<Branch> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

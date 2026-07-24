@@ -1,8 +1,11 @@
 package com.adour.openclassprog.repository;
 
 import com.adour.openclassprog.model.Account;
+import com.adour.openclassprog.model.Branch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /*
  * @author {Open Class Programming}
@@ -12,4 +15,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
+    List<Account> findAllByOrderByIdDesc();
 }

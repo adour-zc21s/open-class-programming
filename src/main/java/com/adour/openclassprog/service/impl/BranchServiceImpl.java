@@ -76,4 +76,10 @@ public class BranchServiceImpl implements BranchService {
         }
         branchRepository.deleteById(id);
     }
+
+    @Override
+    public List<BranchDTO> getBranchesAscending() {
+        List<Branch> branches = branchRepository.findAllByOrderByIdDesc();
+        return branchMap.toDTOList(branches);
+    }
 }

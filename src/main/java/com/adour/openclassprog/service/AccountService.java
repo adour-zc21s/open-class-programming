@@ -1,6 +1,7 @@
 package com.adour.openclassprog.service;
 
 import com.adour.openclassprog.dto.AccountDTO;
+import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.model.Account;
 
 import javax.security.auth.login.AccountNotFoundException;
@@ -20,4 +21,5 @@ public interface AccountService {
     AccountDTO getAccountById(Long id);
     AccountDTO updateAccount(Long id, AccountDTO accountDTO);
     void deleteAccount(Long id);
+    public List<AccountDTO> getAccountAscending();
 }

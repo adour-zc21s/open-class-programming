@@ -76,4 +76,10 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccount(Long id) {
 
     }
+
+    @Override
+    public List<AccountDTO> getAccountAscending() {
+        List<Account> acc = accountRepository.findAllByOrderByIdDesc();
+        return accountMap.toDTOList(acc);
+    }
 }
