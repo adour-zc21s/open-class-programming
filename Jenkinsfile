@@ -17,7 +17,7 @@ pipeline {
         stage('Build & Test') {
             steps {
                 // Option A: If using system Maven
-                sh 'mvn clean package -DskipTests=false -Dhttp.agent="Mozilla/5.0"'
+                sh 'mvn clean package -DskipTests=false'
             }
         }
 
