@@ -16,9 +16,12 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                // For Maven:
-                sh 'mvn clean package -DskipTests=false'
-                // For Gradle, use: sh './gradlew build'
+                // Option A: If using system Maven
+                sh 'mvn clean package -DskipTests=false -Dhttp.agent="Mozilla/5.0"'
+
+                // Option B: If using Maven Wrapper (mvnw)
+                // sh 'chmod +x ./mvnw'
+                // sh './mvnw clean package -DskipTests=false -Dhttp.agent="Mozilla/5.0"'
             }
         }
 
