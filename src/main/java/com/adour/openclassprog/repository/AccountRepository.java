@@ -3,6 +3,7 @@ package com.adour.openclassprog.repository;
 import com.adour.openclassprog.model.Account;
 import com.adour.openclassprog.model.Branch;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,5 +16,6 @@ import java.util.List;
  */
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    List<Account> findAllByOrderByNameAsc();
+    @Query("SELECT a FROM Account a ORDER BY LOWER(a.name) ASC")
+    List<Account> findAllByOrderByNameAscIgnoreCase();
 }

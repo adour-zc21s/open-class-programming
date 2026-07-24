@@ -79,7 +79,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDTO> getAccountAscending() {
-        List<Account> acc = accountRepository.findAllByOrderByNameAsc();
+        List<Account> acc = accountRepository.findAllByOrderByNameAscIgnoreCase();
         return accountMap.toDTOList(acc);
     }
 }

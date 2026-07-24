@@ -84,11 +84,11 @@ public class TicketController {
     // /api/tickets/{ticketId}/branches
     @GetMapping("/branches")
     public ResponseEntity<List<BranchDTO>> getAllBranches() {
-        return ResponseEntity.ok(branchService.getAllBranches());
+        return ResponseEntity.ok(branchService.getBranchesAscending());
     }
     @GetMapping("/accounts")
     public ResponseEntity<List<AccountDTO>> getAllAccounts() {
-        return ResponseEntity.ok(accountService.getAllAccount());
+        return ResponseEntity.ok(accountService.getAccountAscending());
     }
     @PutMapping("/{id}/close")
     public ResponseEntity<TicketDTO> closeTicket(@PathVariable Long id) {

@@ -5,6 +5,7 @@ import com.adour.openclassprog.model.Branch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @Repository
 public interface BranchRepository extends JpaRepository<Branch, Long> {
     List<BranchDTO> findByNameContainingIgnoreCase(String name);
-    List<Branch> findAllByOrderByNameAsc();
+    @Query("SELECT a FROM Branch a ORDER BY LOWER(a.name) ASC")
+    List<Branch> findAllByOrderByNameAscIgnoreCase();
 //    Page<Branch> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

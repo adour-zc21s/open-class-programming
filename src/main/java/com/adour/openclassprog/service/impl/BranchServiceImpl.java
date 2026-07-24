@@ -79,7 +79,7 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public List<BranchDTO> getBranchesAscending() {
-        List<Branch> branches = branchRepository.findAllByOrderByNameAsc();
+        List<Branch> branches = branchRepository.findAllByOrderByNameAscIgnoreCase();
         return branchMap.toDTOList(branches);
     }
 }
