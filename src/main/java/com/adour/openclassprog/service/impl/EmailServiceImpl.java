@@ -56,7 +56,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public List<EmailDTO> getAllEmail() {
-        List<Email> allEmail = emailRepository.findAll();
+        List<Email> allEmail = emailRepository.findAllByOrderByIdDesc();
         return emailMap.toDTOList(allEmail);
     }
 
