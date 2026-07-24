@@ -17,11 +17,11 @@ pipeline {
         stage('Build & Test') {
             steps {
                 // Option A: If using system Maven
-                sh 'mvn clean package -DskipTests=false -Dhttp.agent="Mozilla/5.0"'
+                // sh 'mvn clean package -DskipTests=false -Dhttp.agent="Mozilla/5.0"'
 
                 // Option B: If using Maven Wrapper (mvnw)
-                // sh 'chmod +x ./mvnw'
-                // sh './mvnw clean package -DskipTests=false -Dhttp.agent="Mozilla/5.0"'
+                sh 'chmod +x ./mvnw'
+                sh './mvnw clean package -DskipTests=false -Dhttp.agent="Mozilla/5.0"'
             }
         }
 
