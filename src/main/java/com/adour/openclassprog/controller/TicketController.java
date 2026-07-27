@@ -12,6 +12,7 @@ import com.adour.openclassprog.service.TicketService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +48,7 @@ public class TicketController {
     }
     @GetMapping
     public ResponseEntity<Page<TicketDTO>> getAllTicket(
-            @PageableDefault(page = 0, size = 10, sort = "createdAt") Pageable pageable) {
+            @PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(ticketService.getAllOpenTickets(pageable));
     }
     @PostMapping
