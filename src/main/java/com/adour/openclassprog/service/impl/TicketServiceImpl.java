@@ -94,7 +94,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Page<TicketDTO> getAllOpenTickets(Pageable pageable) {
-        Page<Ticket> openTicketsPage = ticketRepository.findByStatus("OPEN", pageable);
+        Page<Ticket> openTicketsPage = ticketRepository.findAllOpenTickets("Open", pageable);
         return openTicketsPage.map(ticketMap::toDTO);
     }
 
