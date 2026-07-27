@@ -1,6 +1,8 @@
 package com.adour.openclassprog.repository;
 
 import com.adour.openclassprog.model.Ticket;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,4 +22,5 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query("SELECT t.noTiket FROM Ticket t WHERE t.noTiket LIKE CONCAT(:prefix, '%') ORDER BY t.noTiket DESC LIMIT 1")
     Optional<String> findLatestTicketNoByPrefix(@Param("prefix") String prefix);
     List<Ticket> findByStatusIn(List<String> statuses);
+    Page<Ticket> findByStatus(String status, Pageable pageable);
 }

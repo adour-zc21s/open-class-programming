@@ -6,6 +6,8 @@ import com.adour.openclassprog.model.Ticket;
 import com.adour.openclassprog.repository.TicketRepository;
 import com.adour.openclassprog.config.EmailServiceConfig;
 import com.adour.openclassprog.service.TicketService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,10 +93,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<TicketDTO> getAllOpenTickets() {
-        List<String> activeStatuses = List.of("Open", "In Progress");
-        List<Ticket> activeTickets = ticketRepository.findByStatusIn(activeStatuses);
-        return ticketMap.toDTOList(activeTickets);
+    public Page<TicketDTO> getAllOpenTickets(Pageable pageable) {
+        Page<Ticket> openTicketsPage = ticketRepository.findByStatus("OPEN", pageable);
+        return openTicketsPage.map(ticketMap::toDTO);
     }
 
     @Override
