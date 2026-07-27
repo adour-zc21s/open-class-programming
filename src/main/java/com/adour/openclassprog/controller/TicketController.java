@@ -47,6 +47,7 @@ public class TicketController {
         this.accountService = accountService;
     }
     @GetMapping
+    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<Page<TicketDTO>> getAllTicket(
             @PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(ticketService.getAllOpenTickets(pageable));
