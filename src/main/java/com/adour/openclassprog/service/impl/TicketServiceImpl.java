@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.time.format.DateTimeFormatter;
 
@@ -92,10 +91,14 @@ public class TicketServiceImpl implements TicketService {
         return ticketMap.toDTO(tiket);
     }
 
+
     @Override
-    public Page<TicketDTO> getAllOpenTickets(Pageable pageable) {
-        Page<Ticket> openTicketsPage = ticketRepository.findAllOpenTickets("Open", pageable);
-        return openTicketsPage.map(ticketMap::toDTO);
+    public Page<TicketDTO> getTicketsByStatus(String status, Pageable pageable) {
+        // Call the repository method
+        Page<Ticket> ticketsPage = ticketRepository.findAllTicketsByStatus(status, pageable);
+
+        // Map entity Page to DTO Page
+        return ticketsPage.map(ticketMap::toDTO);
     }
 
     @Override

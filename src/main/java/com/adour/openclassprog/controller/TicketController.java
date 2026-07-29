@@ -46,12 +46,18 @@ public class TicketController {
         this.branchService = branchService;
         this.accountService = accountService;
     }
+    // GET /api/v1/tickets?status=Closed&page=0&size=10
+    // GET /api/v1/tickets?status=Open&page=0&size=10
     @GetMapping
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
-    public ResponseEntity<Page<TicketDTO>> getAllTicket(
+    public ResponseEntity<Page<TicketDTO>> getTicketsByStatus(
+            @RequestParam(name = "status", defaultValue = "Open") String status,
             @PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
-        return ResponseEntity.ok(ticketService.getAllOpenTickets(pageable));
+
+        Page<TicketDTO> tickets = ticketService.getTicketsByStatus(status, pageable);
+        return ResponseEntity.ok(tickets);
     }
+
     @PostMapping
     public ResponseEntity<TicketDTO> addTicket(@RequestBody TicketDTO ticketDTO) {
         TicketDTO simpan = ticketService.createTicket(ticketDTO);

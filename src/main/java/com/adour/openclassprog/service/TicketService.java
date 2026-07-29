@@ -16,8 +16,7 @@ import java.util.List;
 public interface TicketService {
     TicketDTO createTicket(TicketDTO ticketDTO);
     TicketDTO getTicketById(Long id);
-
-    Page<TicketDTO> getAllOpenTickets(Pageable pageable);;
+    Page<TicketDTO> getTicketsByStatus(String status, Pageable pageable);
     TicketDTO updateTicket(Long id, TicketDTO ticketDTO);
     void deleteTicket(Long id);
     TicketDTO closeTicket(Long id);

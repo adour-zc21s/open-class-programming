@@ -23,5 +23,5 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     Optional<String> findLatestTicketNoByPrefix(@Param("prefix") String prefix);
     List<Ticket> findByStatusIn(List<String> statuses);
     @Query("SELECT t FROM Ticket t WHERE t.status = :status")
-    Page<Ticket> findAllOpenTickets(@Param("status") String status, Pageable pageable);
+    Page<Ticket> findAllTicketsByStatus(@Param("status") String status, Pageable pageable);
 }
