@@ -2,6 +2,7 @@ package com.adour.openclassprog.service;
 
 import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.dto.TicketDTO;
+import com.adour.openclassprog.dto.TicketStatsDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,4 +21,5 @@ public interface TicketService {
     TicketDTO updateTicket(Long id, TicketDTO ticketDTO);
     void deleteTicket(Long id);
     TicketDTO closeTicket(Long id);
+    TicketStatsDTO getTicketStats();
 }

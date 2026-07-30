@@ -1,5 +1,6 @@
 package com.adour.openclassprog.repository;
 
+import com.adour.openclassprog.dto.TicketStatsDTO;
 import com.adour.openclassprog.model.Ticket;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,4 +25,14 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByStatusIn(List<String> statuses);
     @Query("SELECT t FROM Ticket t WHERE t.status = :status")
     Page<Ticket> findAllTicketsByStatus(@Param("status") String status, Pageable pageable);
+    @Query("""
+        SELECT new com.adour.openclassprog.dto.TicketStatsDTO(
+            COUNT(t),
+            SUM(CASE WHEN LOWER(t.status) = 'open' THEN 1L ELSE 0L END),
+            SUM(CASE WHEN LOWER(t.status) = 'pending' THEN 1L ELSE 0L END),
+            SUM(CASE WHEN LOWER(t.status) = 'closed' THEN 1L ELSE 0L END)
+        )
+        FROM Ticket t
+    """)
+    TicketStatsDTO getTicketStats();
 }

@@ -2,6 +2,7 @@ package com.adour.openclassprog.service.impl;
 
 import com.adour.openclassprog.config.map.TicketMap;
 import com.adour.openclassprog.dto.TicketDTO;
+import com.adour.openclassprog.dto.TicketStatsDTO;
 import com.adour.openclassprog.model.Ticket;
 import com.adour.openclassprog.repository.TicketRepository;
 import com.adour.openclassprog.config.EmailServiceConfig;
@@ -135,5 +136,10 @@ public class TicketServiceImpl implements TicketService {
             );
         }
         return ticketMap.toDTO(savedTicket);
+    }
+
+    @Override
+    public TicketStatsDTO getTicketStats() {
+        return ticketRepository.getTicketStats();
     }
 }

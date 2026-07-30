@@ -1,9 +1,6 @@
 package com.adour.openclassprog.controller;
 
-import com.adour.openclassprog.dto.AccountDTO;
-import com.adour.openclassprog.dto.BranchDTO;
-import com.adour.openclassprog.dto.TicketCommentDTO;
-import com.adour.openclassprog.dto.TicketDTO;
+import com.adour.openclassprog.dto.*;
 import com.adour.openclassprog.enums.Departments;
 import com.adour.openclassprog.service.AccountService;
 import com.adour.openclassprog.service.BranchService;
@@ -106,5 +103,10 @@ public class TicketController {
     public ResponseEntity<TicketDTO> closeTicket(@PathVariable Long id) {
         TicketDTO closedTicket = ticketService.closeTicket(id);
         return ResponseEntity.ok(closedTicket);
+    }
+    @GetMapping("/stats")
+    public ResponseEntity<TicketStatsDTO> getTicketStats() {
+        TicketStatsDTO stats = ticketService.getTicketStats();
+        return ResponseEntity.ok(stats);
     }
 }
