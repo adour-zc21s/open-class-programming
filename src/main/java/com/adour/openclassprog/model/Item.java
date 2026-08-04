@@ -26,5 +26,6 @@ public class Item {
     private String name;
     private Double price;
     private Integer stockQuantity;
+    private String description;
 
 }

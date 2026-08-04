@@ -49,7 +49,7 @@ public class TicketController {
     @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<Page<TicketDTO>> getTicketsByStatus(
             @RequestParam(name = "status", defaultValue = "Open") String status,
-            @PageableDefault(page = 0, size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+            @PageableDefault(page = 0, size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<TicketDTO> tickets = ticketService.getTicketsByStatus(status, pageable);
         return ResponseEntity.ok(tickets);
