@@ -3,7 +3,6 @@ package com.adour.openclassprog.config.map;
 import com.adour.openclassprog.dto.BranchDTO;
 import com.adour.openclassprog.model.Branch;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
