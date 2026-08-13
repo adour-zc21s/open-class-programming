@@ -97,6 +97,7 @@ public class BranchController {
         return ResponseEntity.noContent().build();
     }
 
+    // Monitoring status
     @GetMapping("/{id}/status")
     public ResponseEntity<Map<String, Object>> checkBranchIpStatus(@PathVariable Long id) {
         // 1. Cari branch berdasarkan ID dari database
