@@ -2,6 +2,7 @@ package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.config.map.BranchMap;
 import com.adour.openclassprog.dto.BranchDTO;
+import com.adour.openclassprog.model.Branch;
 import com.adour.openclassprog.repository.BranchRepository;
 import com.adour.openclassprog.service.BranchService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,7 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.List;
+import java.util.Map;
 
 /*
  * @author {Open Class Programming}
@@ -89,5 +95,32 @@ public class BranchController {
     public ResponseEntity<Void> deleteBranch(@PathVariable Long id) {
         branchService.deleteBranch(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/status")
+    public ResponseEntity<Map<String, Object>> checkBranchIpStatus(@PathVariable Long id) {
+        // 1. Cari branch berdasarkan ID dari database
+        Branch branch = branchRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Branch tidak ditemukan"));
+
+        // 2. Ambil IP Public dari entity Branch
+        String ipPublic = branch.getNoIsp1(); // penempatan IP Public ada di field database ini
+
+        boolean isReachable = false;
+        if (ipPublic != null && !ipPublic.isEmpty()) {
+            // Alternatif pengecekan lewat Socket Port (Lebih Akurat untuk IP Public)
+            try (Socket socket = new Socket()) {
+                socket.connect(new InetSocketAddress(ipPublic, 8291), 3000); // Cek koneksi port 8291 dengan timeout 3 detik
+                isReachable = true;
+            } catch (IOException e) {
+                isReachable = false;
+            }
+        }
+
+        return ResponseEntity.ok(Map.of(
+                "branchId", id,
+                "ipPublic", ipPublic != null ? ipPublic : "-",
+                "online", isReachable
+        ));
     }
 }

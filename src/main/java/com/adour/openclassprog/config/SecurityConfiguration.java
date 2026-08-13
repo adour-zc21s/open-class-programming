@@ -46,6 +46,7 @@ public class SecurityConfiguration {
                                 "/api/v1/auth/**",
                                 "/api/v1/dev/search",
                                 "/api/v1/branches/search",
+                                "/api/v1/branches/*/status",
                                 "/api/v1/tickets",
                                 "/api/v1/accounts",
                                 "/api/v1/emails/search",
@@ -83,6 +84,7 @@ public class SecurityConfiguration {
         config.addAllowedOrigin("http://10.101.56.232:3000");
         config.addAllowedOrigin("http://202.51.103.154:3000");
         config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedOrigin("http://localhost:54375");  // flutter localhost UI
 
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.AUTHORIZATION,
