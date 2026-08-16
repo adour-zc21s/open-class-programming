@@ -57,12 +57,14 @@ public class MonitorController {
 
         // 2. Ambil IP Public dari entity Monitor
         String ipPublic = monitor.getIp();
+        String portStr = monitor.getPort();
 
         boolean isReachable = false;
         if (ipPublic != null && !ipPublic.isEmpty()) {
             // Alternatif pengecekan lewat Socket Port (Lebih Akurat untuk IP Public)
             try (Socket socket = new Socket()) {
-                socket.connect(new InetSocketAddress(ipPublic, 8291), 3000); // Cek koneksi port 8291 dengan timeout 3 detik
+                int port = Integer.parseInt(portStr.trim());
+                socket.connect(new InetSocketAddress(ipPublic, port), 3000); // Cek koneksi port 8291 dengan timeout 3 detik
                 isReachable = true;
             } catch (IOException e) {
                 isReachable = false;
@@ -70,7 +72,7 @@ public class MonitorController {
         }
 
         return ResponseEntity.ok(Map.of(
-                "Monitor ID", id,
+                "Aplikasi ID", id,
                 "ipPublic", ipPublic != null ? ipPublic : "-",
                 "online", isReachable
         ));
