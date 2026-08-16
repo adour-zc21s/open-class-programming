@@ -1,7 +1,6 @@
 package com.adour.openclassprog.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 /*
  * @author {Open Class Programming}
