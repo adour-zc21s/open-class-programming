@@ -47,6 +47,7 @@ public class SecurityConfiguration {
                                 "/api/v1/dev/search",
                                 "/api/v1/branches/search",
                                 "/api/v1/branches/*/status",
+                                "/api/v1/monitoring",
                                 "/api/v1/monitoring/*/status",
                                 "/api/v1/items",
                                 "/api/v1/tickets",
