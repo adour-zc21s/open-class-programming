@@ -51,7 +51,7 @@ public class MonitorController {
     }
     @GetMapping("/{id}/status")
     public ResponseEntity<Map<String, Object>> checkMonitorIpStatus(@PathVariable Long id) {
-        // 1. Cari branch berdasarkan ID dari database
+        // 1. Cari aplikasi berdasarkan ID dari database
         Monitor monitor = monitorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Aplikasi tidak ditemukan dengan id:" +id));
 
