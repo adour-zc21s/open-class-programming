@@ -56,7 +56,7 @@ public class BranchController {
     @GetMapping
     @PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<List<BranchDTO>> getAllBranches() {
-        return ResponseEntity.ok(branchService.getAllBranches());
+        return ResponseEntity.ok(branchService.getBranchesByIdDesc());
     }
 
     @GetMapping("/{id}")

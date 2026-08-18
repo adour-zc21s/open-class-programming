@@ -19,5 +19,6 @@ public interface BranchRepository extends JpaRepository<Branch, Long> {
     List<BranchDTO> findByNameContainingIgnoreCase(String name);
     @Query("SELECT a FROM Branch a ORDER BY LOWER(a.name) ASC")
     List<Branch> findAllByOrderByNameAscIgnoreCase();
+    List<Branch> findAllByOrderByIdDesc();
 //    Page<Branch> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

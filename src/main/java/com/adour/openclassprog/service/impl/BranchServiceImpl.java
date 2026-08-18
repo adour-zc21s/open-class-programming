@@ -82,4 +82,10 @@ public class BranchServiceImpl implements BranchService {
         List<Branch> branches = branchRepository.findAllByOrderByNameAscIgnoreCase();
         return branchMap.toDTOList(branches);
     }
+
+    @Override
+    public List<BranchDTO> getBranchesByIdDesc() {
+        List<Branch> branches = branchRepository.findAllByOrderByIdDesc();
+        return branchMap.toDTOList(branches);
+    }
 }

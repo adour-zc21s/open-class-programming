@@ -17,4 +17,5 @@ public interface BranchService {
     BranchDTO updateBranch(Long id, BranchDTO branchDTO);
     void deleteBranch(Long id);
     public List<BranchDTO> getBranchesAscending();
+    public List<BranchDTO> getBranchesByIdDesc();
 }
