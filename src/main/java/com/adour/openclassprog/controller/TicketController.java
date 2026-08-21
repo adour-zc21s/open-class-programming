@@ -2,6 +2,7 @@ package com.adour.openclassprog.controller;
 
 import com.adour.openclassprog.dto.*;
 import com.adour.openclassprog.enums.Departments;
+import com.adour.openclassprog.enums.JenisDukungan;
 import com.adour.openclassprog.service.AccountService;
 import com.adour.openclassprog.service.BranchService;
 import com.adour.openclassprog.service.TicketCommentService;
@@ -94,6 +95,9 @@ public class TicketController {
     @GetMapping("/branches")
     public ResponseEntity<List<BranchDTO>> getAllBranches() {
         return ResponseEntity.ok(branchService.getBranchesAscending());
+    }@GetMapping("/supporttype")
+    public List<JenisDukungan> getSupportTypes(){
+        return Arrays.asList(JenisDukungan.values());
     }
     @GetMapping("/accounts")
     public ResponseEntity<List<AccountDTO>> getAllAccounts() {
