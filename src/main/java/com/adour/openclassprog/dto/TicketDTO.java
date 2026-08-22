@@ -16,6 +16,7 @@ public record TicketDTO(
     String priority,
     String judul,
     String dibuatOleh,
+    String userName,
     String emailNotification,
     String branch,
     String jenisDukungan,

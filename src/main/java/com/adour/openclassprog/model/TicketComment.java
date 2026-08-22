@@ -36,6 +36,12 @@ public class TicketComment {
  @Column(name = "comment", columnDefinition = "TEXT")
  private String comment;
 
+ @Column(name = "commented_by")
+ private String commentedBy;
+
+ @Column(name = "user_name")
+ private String userName;
+
  @CreatedDate
  @Column(name = "created_at", nullable = false, updatable = false)
  private LocalDateTime createdAt;

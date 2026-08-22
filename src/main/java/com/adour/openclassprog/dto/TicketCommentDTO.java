@@ -12,6 +12,7 @@ public record TicketCommentDTO(
     Long id,
     Long ticketId,
     String comment,
+    String commentedBy,
     LocalDateTime createdAt,
     LocalDateTime updatedAt
 ) {
