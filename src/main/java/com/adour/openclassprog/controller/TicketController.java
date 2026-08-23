@@ -113,4 +113,8 @@ public class TicketController {
         TicketStatsDTO stats = ticketService.getTicketStats();
         return ResponseEntity.ok(stats);
     }
+    @GetMapping("/open-requests")
+    public List<TicketDTO> getOpenRequests() {
+        return ticketService.getOpenRequestTickets();
+    }
 }

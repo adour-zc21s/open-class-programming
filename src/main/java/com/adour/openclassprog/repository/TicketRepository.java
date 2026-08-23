@@ -1,5 +1,6 @@
 package com.adour.openclassprog.repository;
 
+import com.adour.openclassprog.dto.TicketDTO;
 import com.adour.openclassprog.dto.TicketStatsDTO;
 import com.adour.openclassprog.model.Ticket;
 import org.springframework.data.domain.Page;
@@ -35,4 +36,5 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
         FROM Ticket t
     """)
     TicketStatsDTO getTicketStats();
+    List<Ticket> findByStatusAndJenisDukungan(String status, String jenisDukungan);
 }

@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.time.format.DateTimeFormatter;
 
@@ -141,5 +142,10 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketStatsDTO getTicketStats() {
         return ticketRepository.getTicketStats();
+    }
+    @Override
+    public List<TicketDTO> getOpenRequestTickets() {
+        List<Ticket> tickets = ticketRepository.findByStatusAndJenisDukungan("OPEN", "REQUEST");
+        return ticketMap.toDTOList(tickets); // MapStruct mengubahnya otomatis
     }
 }

@@ -22,4 +22,5 @@ public interface TicketService {
     void deleteTicket(Long id);
     TicketDTO closeTicket(Long id);
     TicketStatsDTO getTicketStats();
+    List<TicketDTO> getOpenRequestTickets();
 }
