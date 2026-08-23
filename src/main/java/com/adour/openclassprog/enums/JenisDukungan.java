@@ -10,8 +10,10 @@ public enum JenisDukungan {
     Installation("Installation"),
     Configuration("Configuration"),
     Replacement("Replacement"),
-    Throubleshoot("Throubleshoot"),
-    Request("Request");
+    Request("Request"),
+    Service("Service"),
+    Throubleshoot("Throubleshoot");
+
     private final String JenisDukungan;
 
     JenisDukungan(String jenisDukungan) {
