@@ -47,7 +47,7 @@ public class TicketController {
     // GET /api/v1/tickets?status=Closed&page=0&size=10
     // GET /api/v1/tickets?status=Open&page=0&size=10
     @GetMapping
-    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
+//    @PreAuthorize("hasAuthority('UPDATE_PRIVILEGE') and hasRole('ADMIN')")
     public ResponseEntity<Page<TicketDTO>> getTicketsByStatus(
             @RequestParam(name = "status", defaultValue = "Open") String status,
             @PageableDefault(page = 0, size = 5, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {

@@ -23,6 +23,8 @@ public class AuthenticationResponse {
     private String email;
     private List<String> roles;
 
+    @JsonProperty("first_name")
+    private String firstname;
     @JsonProperty("access_token")
     private String accessToken;
     @JsonProperty("refresh_token")

@@ -76,6 +76,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .accessToken(jwt)
                 .roles(roles)
                 .email(user.getEmail())
+                .firstname(user.getFirstname())
                 .id(user.getId())
                 .refreshToken(refreshToken.getToken())
                 .tokenType( TokenType.BEARER.name())
