@@ -42,7 +42,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketDTO createTicket(TicketDTO ticketDTO) {
         // Generate the date prefix (e.g., "TKT20260710")
-        String datePrefix = "TKT" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String datePrefix = "TKT" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
 
         // Query the DB for the highest sequence number used today
         String latestTicketNo = ticketRepository.findLatestTicketNoByPrefix(datePrefix).orElse(null);
