@@ -12,6 +12,7 @@ public enum JenisDukungan {
     Replacement("Replacement"),
     Request("Request"),
     Service("Service"),
+    Maintenance("Maintenance"),
     Throubleshoot("Throubleshoot");
 
     private final String JenisDukungan;
