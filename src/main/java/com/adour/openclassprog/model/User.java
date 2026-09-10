@@ -2,10 +2,7 @@ package com.adour.openclassprog.model;
 
 import com.adour.openclassprog.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,7 +17,8 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "_user")
 public class User implements UserDetails {
@@ -29,6 +27,11 @@ public class User implements UserDetails {
     private Long id;
     private String firstname;
     private String lastname;
+
+    @Column(unique = true, nullable = false) // 👈 Tambahkan agar username unik dan tidak boleh null
+    private String username;
+
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
     private String profileImageUrl;
@@ -36,19 +39,20 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    // we should return a list of roles
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return role.getAuthorities();
     }
+
     @Override
     public String getPassword() {
         return password;
     }
 
+    // 👈 Ubah dari 'return email;' menjadi 'return username;'
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

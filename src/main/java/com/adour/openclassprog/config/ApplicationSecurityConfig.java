@@ -31,9 +31,9 @@ public class ApplicationSecurityConfig {
      * we provide an implementation of the UserDetailsService functional interface, which has a loadByUsername method
      * throws UsernameNotFoundException */
     @Bean
-    public UserDetailsService userDetailsService(){
-        return username -> userRepository.findByEmail(username)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+    public UserDetailsService userDetailsService() {
+        return identifier -> userRepository.findByEmailOrUsername(identifier, identifier)
+                .orElseThrow(() -> new UsernameNotFoundException("User tidak ditemukan dengan email/username: " + identifier));
     }
 
     @Bean

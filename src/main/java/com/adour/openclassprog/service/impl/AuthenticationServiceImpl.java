@@ -37,6 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var user = User.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
+                .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
@@ -53,6 +54,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return AuthenticationResponse.builder()
                 .accessToken(jwt)
                 .email(user.getEmail())
+                .username(user.getUsername())
                 .id(user.getId())
                 .refreshToken(refreshToken.getToken())
                 .roles(roles)
@@ -62,10 +64,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        // 1. Jalankan autentikasi Spring Security (memakai identifier & password)
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+                new UsernamePasswordAuthenticationToken(
+                        request.getIdentifier(),
+                        request.getPassword()
+                )
+        );
 
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
+        // 2. Ambil data user dari DB
+        var user = userRepository.findByEmailOrUsername(request.getIdentifier(), request.getIdentifier())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email/username or password."));
         var roles = user.getRole().getAuthorities()
                 .stream()
                 .map(SimpleGrantedAuthority::getAuthority)
@@ -76,6 +85,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .accessToken(jwt)
                 .roles(roles)
                 .email(user.getEmail())
+                .username(user.getUsername())
                 .firstname(user.getFirstname())
                 .id(user.getId())
                 .refreshToken(refreshToken.getToken())

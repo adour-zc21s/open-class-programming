@@ -27,6 +27,7 @@ public class AuthenticationResponse {
     private String firstname;
     @JsonProperty("access_token")
     private String accessToken;
+    private String username;
     @JsonProperty("refresh_token")
     private String refreshToken;
     @JsonProperty("token_type")
