@@ -38,6 +38,7 @@ public class OrderService {
     public Order createOrder(Order orderRequest) {
         Order order = new Order();
         order.setCustomerName(orderRequest.getCustomerName());
+        order.setDescription(orderRequest.getDescription());
         order.setOrderDate(LocalDateTime.now());
 
         double totalAmount = 0.0;
