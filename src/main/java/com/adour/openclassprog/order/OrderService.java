@@ -47,14 +47,19 @@ public class OrderService {
             Item item = itemRepository.findById(detailRequest.getItem().getId())
                     .orElseThrow(() -> new RuntimeException("Item not found with id: " + detailRequest.getItem().getId()));
 
-            // 2. Check stock availability
-            if (item.getStockQuantity() < detailRequest.getQuantity()) {
-                throw new RuntimeException("Not enough stock for item: " + item.getName());
-            }
+            // Periksa apakah item BUKAN tipe/kode "L"
+            boolean isStockDeductible = !"L".equalsIgnoreCase(item.getCode());
 
-            // 3. Deduct stock
-            item.setStockQuantity(item.getStockQuantity() - detailRequest.getQuantity());
-            itemRepository.save(item);
+            if (isStockDeductible) {
+                // 2. Check stock availability (hanya untuk item non-L)
+                if (item.getStockQuantity() < detailRequest.getQuantity()) {
+                    throw new RuntimeException("Not enough stock for item: " + item.getName());
+                }
+
+                // 3. Deduct stock (hanya untuk item non-L)
+                item.setStockQuantity(item.getStockQuantity() - detailRequest.getQuantity());
+                itemRepository.save(item);
+            }
 
             // 4. Construct Order Detail
             OrderDetail detail = new OrderDetail();
