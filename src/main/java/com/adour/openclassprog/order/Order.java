@@ -30,6 +30,7 @@ public class Order {
     private LocalDateTime orderDate;
     private String customerName;
     private String description;
+    private String status;
     private Double totalAmount;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
