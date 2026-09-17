@@ -86,4 +86,38 @@ public class OrderService {
     public BigDecimal getTotalAmountCompleted() {
         return orderRepository.sumTotalAmountByStatus("selesai");
     }
+    @Transactional
+    public Order updateOrder(Long orderId, Order order) {
+        Order existingOrder = orderRepository.findById(orderId)
+                .orElseThrow(()->new RuntimeException("Order tidak ditemukan dengan order ID: " + orderId));
+        // Update attribute dasar Order
+        existingOrder.setCustomerName(order.getCustomerName());
+        existingOrder.setDescription(order.getDescription());
+        existingOrder.setStatus(order.getStatus());
+        existingOrder.setTotalAmount(order.getTotalAmount());
+
+        // Hapus detail lama dan ganti dengan detail baru
+        existingOrder.getOrderDetails().clear();
+        double calculatedTotalAmount = 0.0;
+        if (order.getOrderDetails() != null) {
+            for (OrderDetail orderDetail : order.getOrderDetails()) {
+                Item item = itemRepository.findById(orderDetail.getId())
+                        .orElseThrow(() -> new RuntimeException("Item tidak ditemukan dengan ID: " + orderDetail.getId()));
+
+                OrderDetail detail = new OrderDetail();
+                detail.setItem(item);
+                detail.setQuantity(orderDetail.getQuantity());
+                detail.setPriceAtPurchase(orderDetail.getPriceAtPurchase());
+                detail.setOrder(existingOrder);
+
+                existingOrder.getOrderDetails().add(detail);
+                // Hitung akumulasi totalAmount
+                calculatedTotalAmount += (detail.getQuantity() * detail.getPriceAtPurchase());
+            }
+        }
+        // Set totalAmount hasil perhitungan otomatis
+        existingOrder.setTotalAmount(calculatedTotalAmount);
+
+        return orderRepository.save(existingOrder);
+    }
 }

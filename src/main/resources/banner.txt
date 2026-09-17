@@ -1,13 +1,14 @@
 ${AnsiColor.BLUE}
-  ████████ ██   ███████   ████     ██
- ██░░░░░░ ░██  ██░░░░░██ ░██░██   ░██
-░██       ░██ ██     ░░██░██░░██  ░██
-░█████████░██░██      ░██░██ ░░██ ░██
-░░░░░░░░██░██░██      ░██░██  ░░██░██
-       ░██░██░░██     ██ ░██   ░░████
- ████████ ░██ ░░███████  ░██    ░░███
-░░░░░░░░  ░░   ░░░░░░░   ░░      ░░░
+ ███████   ██ ████████ ██   ██
+░██░░░░██ ░██░██░░░░░ ░██  ██
+░██   ░██ ░██░██      ░██ ██
+░███████  ░██░███████ ░████
+░██░░░██  ░██░██░░░░  ░██░██
+░██  ░░██ ░██░██      ░██░░██
+░██   ░░██░██░████████░██ ░░██
+░░     ░░ ░░ ░░░░░░░░ ░░   ░░
 ${AnsiStyle.NORMAL}
+
 Version number of your application declared in MANIFEST.MF: ${application.version}
 Version number of your application declared in MANIFEST.MF formatted: ${application.formatted-version}
 Spring Boot version: ${spring-boot.version}

@@ -55,4 +55,13 @@ public class OrderController {
         BigDecimal total = orderService.getTotalAmountCompleted();
         return ResponseEntity.ok(Map.of("totalAmount", total));
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateOrder(@PathVariable("id") Long id, @RequestBody Order order) {
+        try {
+            Order updatedOrder = orderService.updateOrder(id, order);
+            return ResponseEntity.ok(updatedOrder);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
