@@ -5,6 +5,7 @@ import com.adour.openclassprog.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -81,5 +82,8 @@ public class OrderService {
 
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
+    }
+    public BigDecimal getTotalAmountCompleted() {
+        return orderRepository.sumTotalAmountByStatus("selesai");
     }
 }

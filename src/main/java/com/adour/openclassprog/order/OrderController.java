@@ -2,10 +2,13 @@ package com.adour.openclassprog.order;
 
 import com.adour.openclassprog.model.Item;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /*
  * @author {Open Class Programming}
@@ -46,5 +49,10 @@ public class OrderController {
     @GetMapping("/orders")
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
+    }
+    @GetMapping("/revenue")
+    public ResponseEntity<Map<String, Object>> getTotalCompleted() {
+        BigDecimal total = orderService.getTotalAmountCompleted();
+        return ResponseEntity.ok(Map.of("totalAmount", total));
     }
 }
