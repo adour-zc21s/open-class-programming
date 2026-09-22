@@ -62,7 +62,7 @@ public class EmailServiceConfig {
                     "    <p>Please do not hesitate to contact us if you have any questions.</p>" +
                     "    <p style=\"font-size: 12px; color: #7f8c8d;\">Best regards,<br>" +
                     "    <strong>IT Support Helpdesk</strong><br>" +
-                    "    OpenClass Hub</p>" +
+                    "    RIEK Hub</p>" +
                     "    <hr style=\"border: 0; border-top: 1px solid #e0e0e0; margin: 5px 0;\">" +
                     "    <p style=\"font-size: 12px; color: #7f8c8d; text-align: center;\">This email is generated automatically. Please do not send a response to this email.</p>" +
                     "  </div>" +
@@ -120,7 +120,7 @@ public class EmailServiceConfig {
                     "    <p>Thank you for your patience and cooperation while our team worked on this issue.</p>" +
                     "    <p style=\"font-size: 12px; color: #7f8c8d;\">Best regards,<br>" +
                     "    <strong>IT Support Helpdesk</strong><br>" +
-                    "    OpenClass Hub</p>" +
+                    "    RIEK Hub</p>" +
                     "    <hr style=\"border: 0; border-top: 1px solid #e0e0e0; margin: 5px 0;\">" +
                     "    <p style=\"font-size: 12px; color: #7f8c8d; text-align: center;\">This email is generated automatically. Please do not send a response to this email.</p>" +
                     "  </div>" +
