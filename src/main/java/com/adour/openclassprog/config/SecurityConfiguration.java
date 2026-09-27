@@ -54,7 +54,7 @@ public class SecurityConfiguration {
                         // 2. Role Khusus (Admin)
                         .requestMatchers(HttpMethod.POST, "/api/v1/resource").hasRole("ADMIN")
 
-                        // 3. Semua sisanya (termasuk /api/v1/items, /api/v1/pockets, dll) WAJIB Login
+                        // 3. Semua sisanya WAJIB Login
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
