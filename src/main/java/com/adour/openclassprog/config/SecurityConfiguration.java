@@ -36,38 +36,27 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(unauthorizedEntryPoint)
                         .accessDeniedHandler(accessDeniedHandler))
                 .authorizeHttpRequests(request -> request
+                        // 1. Publik: Auth, Swagger, Open Monitoring
                         .requestMatchers(
                                 "/api/v1/auth/**",
-                                "/api/v1/dev/search",
-                                "/api/v1/branches/search",
-                                "/api/v1/branches/*/status",
-                                "/api/v1/monitoring",
-                                "/api/v1/monitoring/*/status",
-                                "/api/v1/items",
-                                "/api/v1/tickets",
-                                "/api/v1/accounts",
-                                "/api/v1/emails/search",
-                                "/v2/api-docs",
-                                "/v3/api-docs",
                                 "/v3/api-docs/**",
-                                "/actuator/prometheus",
-                                "/swagger-resources",
-                                "/swagger-resources/**",
-                                "/configuration/ui",
-                                "/configuration/security",
                                 "/swagger-ui/**",
-                                "/webjars/**",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+                                "/actuator/prometheus",
+                                "/uploads/profile-pictures/**"
                         ).permitAll()
+
+                        // 2. Role Khusus (Admin)
                         .requestMatchers(HttpMethod.POST, "/api/v1/resource").hasRole("ADMIN")
-                        .requestMatchers("/uploads/profile-pictures/**").permitAll()
-                        .anyRequest().authenticated())
+
+                        // 3. Semua sisanya (termasuk /api/v1/items, /api/v1/pockets, dll) WAJIB Login
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
