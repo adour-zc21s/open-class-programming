@@ -7,7 +7,7 @@ package com.adour.openclassprog.pocket;
  * Created 27/09/2026 - 18:18
  */
 public enum TransactionType {
-    GAJI,
-    PEMASUKAN_LAIN,
-    PENGELUARAN
+    SALARY,
+    OTHERS_INCOME,
+    EXPENSE
 }

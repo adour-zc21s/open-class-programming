@@ -52,9 +52,9 @@ public class Pocket {
     public BigDecimal getTotalBalance() {
         BigDecimal total = BigDecimal.ZERO;
         for (PocketItem item : items) {
-            if (item.getType() == TransactionType.GAJI || item.getType() == TransactionType.PEMASUKAN_LAIN) {
+            if (item.getType() == TransactionType.SALARY || item.getType() == TransactionType.OTHERS_INCOME) {
                 total = total.add(item.getAmount());
-            } else if (item.getType() == TransactionType.PENGELUARAN) {
+            } else if (item.getType() == TransactionType.EXPENSE) {
                 total = total.subtract(item.getAmount());
             }
         }

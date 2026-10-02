@@ -85,9 +85,9 @@ public class PocketServiceImpl implements PocketService {
         BigDecimal totalExpense = BigDecimal.ZERO;
 
         for (PocketItem item : items) {
-            if (item.getType() == TransactionType.GAJI || item.getType() == TransactionType.PEMASUKAN_LAIN) {
+            if (item.getType() == TransactionType.SALARY || item.getType() == TransactionType.OTHERS_INCOME) {
                 totalIncome = totalIncome.add(item.getAmount());
-            } else if (item.getType() == TransactionType.PENGELUARAN) {
+            } else if (item.getType() == TransactionType.EXPENSE) {
                 totalExpense = totalExpense.add(item.getAmount());
             }
         }
